@@ -1,3 +1,4 @@
+import GithubIcon from "@/src/icons/GithubIcon";
 import Link from "next/link";
 import React from "react";
 
@@ -19,8 +20,9 @@ function HeroSection() {
         </Link>
         <Link
           href="https://github.com/MahdiKgz/task-manager-front"
-          className="btn btn-ghost btn-primary btn-wide hover:btn-primary"
+          className="btn btn-outline btn-primary btn-wide hover:btn-primary"
         >
+          <GithubIcon />
           Visit Github
         </Link>
       </div>
