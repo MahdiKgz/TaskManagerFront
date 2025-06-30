@@ -1,0 +1,31 @@
+import Link from "next/link";
+import React from "react";
+
+function HeroSection() {
+  return (
+    <div className="flex flex-col items-center justify-center gap-y-16 sm:gap-8 py-2 sm:py-3 my-16 sm:my-10">
+      <h1 className="font-bold text-3xl text-center bg-gradient-to-l text-transparent bg-clip-text from-amber-200 to-amber-600">
+        A Minimalist Task Manger For your Daily Routines
+      </h1>
+      <span className="text-gray-300 max-w-2xl text-center">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
+        nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
+        volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+        ullamcorper suscipit lobortis nisl ut aliquip
+      </span>
+      <div className="w-full h-10 flex flex-col sm:flex-row  items-center justify-center gap-10">
+        <Link href="/login" className="btn btn-warning btn-wide">
+          Login
+        </Link>
+        <Link
+          href="https://github.com/MahdiKgz/task-manager-front"
+          className="btn btn-ghost btn-primary btn-wide hover:btn-primary"
+        >
+          Visit Github
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+export default HeroSection;
