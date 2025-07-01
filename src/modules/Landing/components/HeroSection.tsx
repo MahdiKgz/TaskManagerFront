@@ -14,7 +14,7 @@ function HeroSection() {
         volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
         ullamcorper suscipit lobortis nisl ut aliquip
       </span>
-      <div className="w-full h-10 flex flex-col sm:flex-row  items-center justify-center gap-10">
+      <div className="w-full h-fit flex flex-col sm:flex-row  items-center justify-center gap-7 sm:gap-10">
         <Link href="/login" className="btn btn-warning btn-wide">
           Login
         </Link>

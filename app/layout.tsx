@@ -9,7 +9,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className="w-screen h-screen bg-zinc-900">
+      <body className="w-screen h-screen bg-base-300">
         <Header />
         {children}
         <Footer />
