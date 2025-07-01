@@ -1,10 +1,8 @@
 @import "tailwindcss";
 @plugin "daisyui";
-
-body {
-  overflow-x: hidden;
+* {
+  overflow: auto;
 }
-
 @layer components {
   .container {
     @apply mx-auto w-full;

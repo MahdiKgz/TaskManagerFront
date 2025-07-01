@@ -8,8 +8,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="w-dvw h-dvh">
+    <html lang="en" className="dark">
+      <body className="w-screen h-screen bg-zinc-800">
         <Header />
         {children}
         <Footer />
