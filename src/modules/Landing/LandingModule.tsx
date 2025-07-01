@@ -1,6 +1,6 @@
 import React from "react";
 import HeroSection from "./components/HeroSection";
-import Benefits from "./components/Benefits";
+import Benefits from "./components/Benefits/Benefits";
 
 function LandingModule() {
   return (
