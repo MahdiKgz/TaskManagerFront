@@ -7,7 +7,7 @@ import { loadLinksPreset } from "tsparticles-preset-links";
 
 export default function ParticlesBg() {
   const particlesInit = useCallback(async (engine: Engine) => {
-    await loadLinksPreset(engine); // فقط preset لینک‌ها رو لود کن
+    await loadLinksPreset(engine); // Load only the "links" preset
   }, []);
 
   return (
@@ -18,7 +18,7 @@ export default function ParticlesBg() {
         preset: "links",
         background: {
           color: {
-            value: "#15191e",
+            value: "#15191e", // Background color if needed
           },
         },
         fullScreen: {
@@ -29,13 +29,24 @@ export default function ParticlesBg() {
             speed: 0.5,
           },
           opacity: {
-            value: 0.4,
+            value: 0.2, // Make particles visible
+            random: true,
             animation: {
               enable: true,
-              speed: 1,
+              speed: 0.5,
               minimumValue: 0.1,
               sync: false,
             },
+          },
+          color: {
+            value: "#ffffff", // Particle color
+          },
+          links: {
+            color: "#ffffff", // Link color between particles
+            distance: 150,
+            enable: true,
+            opacity: 0.2,
+            width: 1,
           },
         },
       }}

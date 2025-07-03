@@ -10,13 +10,16 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.8.2",
     "@tailwindcss/postcss": "^4.1.11",
     "daisyui": "^5.0.43",
     "husky": "^9.1.7",
     "next": "15.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-hot-toast": "^2.5.2",
     "react-particles-js": "^3.6.0",
+    "react-redux": "^9.2.0",
     "react-tsparticles": "^2.12.2",
     "tailwindcss": "^4.1.11",
     "tsparticles-engine": "^2.12.0",

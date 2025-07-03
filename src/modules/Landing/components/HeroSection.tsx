@@ -24,7 +24,7 @@ function HeroSection() {
           </Link>
           <Link
             href="https://github.com/MahdiKgz/task-manager-front"
-            className="btn btn-outline btn-primary btn-wide hover:btn-primary"
+            className="btn btn-primary btn-wide hover:btn-primary"
           >
             <GithubIcon />
             Visit Github
