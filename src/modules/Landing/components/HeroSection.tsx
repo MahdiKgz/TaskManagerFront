@@ -9,7 +9,7 @@ function HeroSection() {
       <ParticlesBackground />
 
       <div className="relative z-10 flex flex-col items-center justify-center gap-y-8">
-        <h1 className="font-bold text-3xl text-center bg-gradient-to-l text-transparent bg-clip-text from-amber-200 to-amber-600">
+        <h1 className="font-bold text-3xl text-center title-gradient">
           A Minimalist Task Manger For your Daily Routines
         </h1>
         <span className="text-gray-300 max-w-2xl text-center">
