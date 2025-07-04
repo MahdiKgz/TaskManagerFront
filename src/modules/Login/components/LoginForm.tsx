@@ -9,7 +9,7 @@ function LoginForm() {
   const { methods, handleSubmit, isValid, checked, setChecked, onSubmit } =
     useLogin();
   return (
-    <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center sm:rounded-xl">
+    <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center justify-center sm:justify-normal sm:rounded-xl">
       <h1 className="title-gradient font-bold text-3xl">Login</h1>
       <FormProvider {...methods}>
         <form
