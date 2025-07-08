@@ -16,7 +16,11 @@ function Input({ name }: InputProps) {
         className="w-full input focus:input-warning input-lg transition-colors duration-300"
         {...register(name, { required: "this field is required" })}
         placeholder={name}
-        type={name === "password" ? name : "text"}
+        type={
+          name === "password" || name === "confirmPassword"
+            ? "password"
+            : "text"
+        }
       />
       <span className="text-xs text-error font-semibold mx-2">
         {errors[name]?.message}

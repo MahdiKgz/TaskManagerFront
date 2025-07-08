@@ -1,7 +1,8 @@
+import RegisterModule from "@/src/modules/register/RegisterModule";
 import React from "react";
 
 function Register() {
-  return <div>Register</div>;
+  return <RegisterModule />;
 }
 
 export default Register;

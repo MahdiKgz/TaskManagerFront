@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 * {
-  overflow: auto;
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 @layer components {
