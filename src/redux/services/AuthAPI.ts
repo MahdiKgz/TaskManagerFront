@@ -1,5 +1,6 @@
 import { IRegister, IUser } from "@/src/types/Auth.types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { setUser } from "../slices/authSlice";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
@@ -13,6 +14,11 @@ export const AuthApi = createApi({
         method: "POST",
         body,
       }),
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        const { data } = await queryFulfilled;
+        dispatch(setUser(data));
+        console.log("User has been set to auth slice");
+      },
     }),
   }),
 });

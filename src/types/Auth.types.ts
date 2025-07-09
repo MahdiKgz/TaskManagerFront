@@ -8,4 +8,10 @@ export interface IRegister {
 
 export interface IUser extends IRegister {
   _id: string;
+  token: string;
+}
+
+export type UserWithoutConfirm = Omit<IUser, "confirmPassword">;
+export interface AuthSliceState {
+  user: UserWithoutConfirm | null;
 }
