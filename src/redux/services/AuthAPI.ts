@@ -17,7 +17,6 @@ export const AuthApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
         dispatch(setUser(data));
-        console.log("User has been set to auth slice");
       },
     }),
   }),
