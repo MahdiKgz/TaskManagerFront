@@ -1,9 +1,12 @@
+"use client";
 import GithubIcon from "@/src/icons/GithubIcon";
 import Linkedin from "@/src/icons/Linkedin";
 import Link from "next/link";
 import React from "react";
+import { useSelector } from "react-redux";
 
 function Header() {
+  const { user } = useSelector((state: RootState) => state.auth);
   return (
     <div className="container h-20 flex items-center justify-between">
       <h1 className="uppercase font-bold text-xl text-white">Task Manager</h1>

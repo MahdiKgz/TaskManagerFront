@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import { useLoginRequestMutation } from "../redux/services/AuthAPI";
+import { ILogin } from "../types/Auth.types";
+import { useRouter } from "next/navigation";
 
 export default function useLogin() {
+  const router = useRouter();
   const methods = useForm<{ username: string; password: string }>({
     defaultValues: {
       username: "",
@@ -16,9 +20,12 @@ export default function useLogin() {
     formState: { isValid },
   } = methods;
 
-  const onSubmit: SubmitHandler<{ username: string }> = async (data) => {
-    toast.success("Submiited", { duration: 1000 });
-    console.log(data);
+  const [loginRequest] = useLoginRequestMutation();
+
+  const onSubmit: SubmitHandler<ILogin> = async (data) => {
+    await loginRequest(data);
+    toast.success("Welcome Back to Task Manager :)");
+    setTimeout(() => router.push("/"), 1500);
   };
   return { methods, isValid, handleSubmit, checked, setChecked, onSubmit };
 }

@@ -15,3 +15,8 @@ export type UserWithoutConfirm = Omit<IUser, "confirmPassword">;
 export interface AuthSliceState {
   user: UserWithoutConfirm | null;
 }
+
+export interface ILogin {
+  username: string;
+  password: string;
+}
