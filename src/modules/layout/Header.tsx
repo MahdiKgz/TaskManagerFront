@@ -1,6 +1,7 @@
 "use client";
 import GithubIcon from "@/src/icons/GithubIcon";
 import Linkedin from "@/src/icons/Linkedin";
+import { RootState } from "@/src/redux/store";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -19,9 +20,15 @@ function Header() {
             <Linkedin />
           </Link>
         </div>
-        <Link href={"/login"}>
-          <button className="btn btn-warning">Login</button>
-        </Link>
+        {user === null ? (
+          <Link href={"/login"}>
+            <button className="btn btn-warning">Login</button>
+          </Link>
+        ) : (
+          <Link href="/dashboard">
+            <button className="btn btn-warning">{user?.username}</button>
+          </Link>
+        )}
       </div>
     </div>
   );
