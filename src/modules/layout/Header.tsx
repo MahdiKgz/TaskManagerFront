@@ -10,7 +10,7 @@ function Header() {
   const { user } = useSelector((state: RootState) => state.auth);
   return (
     <div className="container h-20 flex items-center justify-between">
-      <h1 className="uppercase font-bold text-xl text-white">Task Manager</h1>
+      <h1 className="uppercase font-bold text-xl text-white">تسکینو</h1>
       <div className="flex items-center gap-6">
         <div className="hidden sm:flex items-center gap-4">
           <Link href="https://github.com/MahdiKgz">
@@ -22,7 +22,7 @@ function Header() {
         </div>
         {user === null ? (
           <Link href={"/login"}>
-            <button className="btn btn-warning">Login</button>
+            <button className="btn btn-warning">ورود به حساب</button>
           </Link>
         ) : (
           <Link href="/dashboard">

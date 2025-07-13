@@ -1,42 +1,42 @@
 export const QUESTIONS = [
   {
-    title: "What is the purpose of this Task Manager?",
+    title: "هدف این برنامه مدیریت وظایف چیست؟",
     description:
-      "This Task Manager helps users organize their daily tasks, set deadlines, and track progress in a simple and intuitive interface.",
+      "این برنامه به کاربران کمک می‌کند تا وظایف روزانه خود را سازمان‌دهی کرده، ضرب‌الاجل تعیین کرده و پیشرفت خود را به شکلی ساده و شهودی دنبال کنند.",
   },
   {
-    title: "Can I set deadlines and reminders for tasks?",
+    title: "آیا می‌توانم برای وظایف مهلت و یادآور تنظیم کنم؟",
     description:
-      "Yes, you can set specific due dates and receive notifications or visual alerts when a deadline is approaching.",
+      "بله، شما می‌توانید تاریخ سررسید مشخصی تعیین کرده و هنگام نزدیک شدن به ضرب‌الاجل، اعلان یا هشدار تصویری دریافت کنید.",
   },
   {
-    title: "Is user authentication supported?",
+    title: "آیا احراز هویت کاربران پشتیبانی می‌شود؟",
     description:
-      "Absolutely. Users can register, log in securely, and manage their own personal task lists.",
+      "قطعاً. کاربران می‌توانند به صورت ایمن ثبت‌نام کرده، وارد حساب کاربری شوند و لیست وظایف شخصی خود را مدیریت کنند.",
   },
   {
-    title: "Can I categorize or group my tasks?",
+    title: "آیا می‌توانم وظایف را دسته‌بندی یا گروه‌بندی کنم؟",
     description:
-      "Yes, tasks can be organized into categories or projects, making it easier to manage related tasks together.",
+      "بله، شما می‌توانید وظایف را در قالب دسته‌ها یا پروژه‌ها سازمان‌دهی کنید تا مدیریت وظایف مرتبط ساده‌تر شود.",
   },
   {
-    title: "Is this Task Manager mobile-friendly?",
+    title: "آیا این برنامه روی موبایل هم خوب کار می‌کند؟",
     description:
-      "Yes, the UI is fully responsive and optimized for both desktop and mobile devices.",
+      "بله، رابط کاربری کاملاً واکنش‌گراست و برای دستگاه‌های دسکتاپ و موبایل بهینه شده است.",
   },
   {
-    title: "Is there a drag-and-drop feature?",
+    title: "آیا امکان کشیدن و رها کردن (Drag & Drop) وجود دارد؟",
     description:
-      "Yes, tasks can be reordered easily using drag-and-drop functionality for better prioritization.",
+      "بله، شما می‌توانید ترتیب وظایف را با استفاده از قابلیت کشیدن و رها کردن به راحتی تغییر دهید.",
   },
   {
-    title: "Can I collaborate with other users?",
+    title: "آیا می‌توانم با دیگر کاربران همکاری کنم؟",
     description:
-      "In this version, collaboration features are not yet available, but they are planned for future updates.",
+      "در این نسخه، قابلیت همکاری هنوز فعال نشده، اما در برنامه‌ریزی برای نسخه‌های آینده قرار دارد.",
   },
   {
-    title: "How is my data stored?",
+    title: "داده‌های من چگونه ذخیره می‌شوند؟",
     description:
-      "Your task data is securely stored in a cloud database and is only accessible by you after authentication.",
+      "اطلاعات وظایف شما به صورت امن در پایگاه داده ابری ذخیره می‌شوند و فقط پس از احراز هویت قابل دسترسی هستند.",
   },
 ];

@@ -1,8 +1,8 @@
 export const BENEFITS = [
   {
-    title: "Effortless Task Management",
+    title: "مدیریت آسان وظایف",
     description:
-      "Add, edit, and organize your daily tasks with a simple, intuitive interface.",
+      "افزودن، ویرایش و سازمان‌دهی وظایف روزانه با رابط کاربری ساده و شهودی.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -21,9 +21,9 @@ export const BENEFITS = [
     ),
   },
   {
-    title: "Smart Reminders",
+    title: "یادآوری‌های هوشمند",
     description:
-      "Never miss a deadline with timely notifications tailored to your schedule.",
+      "هیچ ضرب‌الاجلی را از دست ندهید با نوتیفیکیشن‌هایی متناسب با برنامه شما.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,9 +42,8 @@ export const BENEFITS = [
     ),
   },
   {
-    title: "Cross-Platform Sync",
-    description:
-      "Access your tasks seamlessly across web, mobile, and desktop devices.",
+    title: "همگام‌سازی میان‌پلتفرمی",
+    description: "دسترسی بدون وقفه به وظایف خود در وب، موبایل و دسکتاپ.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -63,9 +62,9 @@ export const BENEFITS = [
     ),
   },
   {
-    title: "Minimalist Design",
+    title: "طراحی مینیمالیستی",
     description:
-      "Focus on what matters with a clean, distraction-free user interface.",
+      "با رابط کاربری تمیز و بدون حواس‌پرتی، بر روی امور مهم تمرکز کنید.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -84,9 +83,9 @@ export const BENEFITS = [
     ),
   },
   {
-    title: "Progress Tracking",
+    title: "ردیابی پیشرفت",
     description:
-      "Monitor your productivity with insightful reports and task completion stats.",
+      "با گزارش‌های کاربردی و آمار تکمیل وظایف، بهره‌وری خود را بررسی کنید.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -105,9 +104,9 @@ export const BENEFITS = [
     ),
   },
   {
-    title: "Customizable Workflows",
+    title: "گردش‌کار قابل تنظیم",
     description:
-      "Tailor the app to your needs with flexible task categories and priorities.",
+      "با دسته‌بندی‌ها و اولویت‌های انعطاف‌پذیر، برنامه را متناسب با نیازهای خود تنظیم کنید.",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -120,7 +119,7 @@ export const BENEFITS = [
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
-          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31  fights 2.37-2.37zM15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37zM15 12a3 3 0 11-6 0 3 3 0 016 0z"
         />
       </svg>
     ),

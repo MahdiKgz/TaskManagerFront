@@ -14,22 +14,25 @@ function HeroSection() {
 
       <div className="relative z-10 flex flex-col items-center justify-center gap-y-8">
         <h1 className="font-bold text-3xl text-center title-gradient">
-          A Minimalist Task Manger For your Daily Routines
+          تسکینو ؛ یه راه ساده برای مدیریت کار های روزانه
         </h1>
         <span className="text-gray-300 max-w-2xl text-center">
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-          volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip
+          لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده
+          از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و
+          سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای
+          متنوع با هدف بهبود ابزارهای کاربردی می باشد. کتابهای زیادی در شصت و سه
+          درصد گذشته، حال و آینده شناخت فراوان جامعه و متخصصان را می طلبد تا با
+          نرم افزارها شناخت بیشتری را برای طراحان رایانه ای علی الخصوص طراحان
+          خلاقی و فرهنگ پیشرو در زبان فارسی ایجاد کرد.
         </span>
-        <div className="w-full h-fit flex flex-col sm:flex-row items-center justify-center gap-7 sm:gap-10">
+        <div className="w-full h-fit flex flex-col sm:flex-row-reverse items-center justify-center gap-7 sm:gap-10">
           {user === null ? (
             <Link href="/login" className="btn btn-warning btn-wide">
-              Login
+              ورود به حساب
             </Link>
           ) : (
             <Link href="/dashboard" className="btn btn-warning btn-wide">
-              Create Tasks
+              ایجاد تسک
             </Link>
           )}
 
@@ -38,7 +41,7 @@ function HeroSection() {
             className="btn btn-primary btn-wide hover:btn-primary"
           >
             <GithubIcon />
-            Visit Github
+            مشارکت در توسعه
           </Link>
         </div>
       </div>

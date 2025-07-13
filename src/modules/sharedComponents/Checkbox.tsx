@@ -19,7 +19,7 @@ function Checkbox({
         onClick={() => setChecked(!checked)}
       />
       <label htmlFor="remember-me" className="text-sm">
-        Remember Me
+        مرا به خاطر بسپار
       </label>
     </div>
   );

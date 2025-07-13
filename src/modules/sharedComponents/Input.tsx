@@ -1,3 +1,4 @@
+import { PLACEHOLDER } from "@/src/constants/placeholders";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -15,7 +16,7 @@ function Input({ name }: InputProps) {
       <input
         className="w-full input focus:input-warning input-lg transition-colors duration-300"
         {...register(name, { required: "this field is required" })}
-        placeholder={name}
+        placeholder={PLACEHOLDER[name]}
         type={
           name === "password" || name === "confirmPassword"
             ? "password"
