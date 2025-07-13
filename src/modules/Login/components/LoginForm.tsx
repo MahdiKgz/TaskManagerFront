@@ -5,6 +5,7 @@ import Input from "../../sharedComponents/Input";
 import Checkbox from "../../sharedComponents/Checkbox";
 import Link from "next/link";
 import toast from "react-hot-toast";
+import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 
 function LoginForm() {
   const { methods, handleSubmit, isValid, checked, setChecked, onSubmit } =
@@ -18,8 +19,8 @@ function LoginForm() {
           className="w-[80%] flex flex-col gap-y-5 items-center mt-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Input name="username" />
-          <Input name="password" />
+          <Input name="username" validation={VALIDATION_RULES.name} />
+          <Input name="password" validation={VALIDATION_RULES.password} />
           <Checkbox
             label="Remember Me"
             checked={checked}

@@ -5,6 +5,7 @@ import Input from "../../sharedComponents/Input";
 import Checkbox from "../../sharedComponents/Checkbox";
 import Link from "next/link";
 import useRegister from "@/src/hooks/useRegister";
+import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 
 function RegisterForm() {
   const { methods, handleSubmit, checked, setChecked, onSubmit, isValid } =
@@ -18,11 +19,14 @@ function RegisterForm() {
           className="w-[80%] flex flex-col gap-y-5 items-center mt-6"
           onSubmit={handleSubmit(onSubmit)}
         >
-          <Input name="name" />
-          <Input name="username" />
-          <Input name="email" />
-          <Input name="password" />
-          <Input name="confirmPassword" />
+          <Input name="name" validation={VALIDATION_RULES.name} />
+          <Input name="username" validation={VALIDATION_RULES.username} />
+          <Input name="email" validation={VALIDATION_RULES.email} />
+          <Input name="password" validation={VALIDATION_RULES.password} />
+          <Input
+            name="confirmPassword"
+            validation={VALIDATION_RULES.password}
+          />
           <Checkbox
             label="Remember Me"
             checked={checked}
