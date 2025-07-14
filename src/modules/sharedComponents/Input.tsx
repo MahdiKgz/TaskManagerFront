@@ -29,7 +29,7 @@ function Input({ name, validation }: InputProps) {
         }
       />
       <span className="text-xs text-error font-semibold mx-2">
-        {errors[name]?.message}
+        {errors[name]?.message as React.ReactNode}
       </span>
     </div>
   );
