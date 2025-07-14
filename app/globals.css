@@ -52,4 +52,10 @@ body {
   .title-gradient {
     @apply bg-gradient-to-l text-transparent bg-clip-text from-amber-200 to-amber-600;
   }
+  .dashboard-btn {
+    @apply w-full flex items-center justify-start gap-2 py-2 px-5 rounded-lg btn btn-soft btn-warning duration-300;
+  }
+  .logout-btn {
+    @apply w-full flex items-center justify-start gap-2 hover:gap-3 py-2 px-5 rounded-lg btn btn-soft btn-error duration-300;
+  }
 }

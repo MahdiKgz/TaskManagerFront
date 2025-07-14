@@ -1,13 +1,9 @@
 "use client";
-import { RootState } from "@/src/redux/store";
 import React from "react";
-import { useSelector } from "react-redux";
+import DashboardModule from "@/src/modules/dashboard/Dashboard";
 
 function Dashboard() {
-  const user = useSelector((state: RootState) => state.auth.user);
-  if (user) {
-    return <div>welcome {user.username}</div>;
-  }
+  return <DashboardModule />;
 }
 
 export default Dashboard;
