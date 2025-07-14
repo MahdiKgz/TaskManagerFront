@@ -1,5 +1,4 @@
 import { SOCIAL_MEDIA } from "@/src/constants/socialMedia";
-import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 

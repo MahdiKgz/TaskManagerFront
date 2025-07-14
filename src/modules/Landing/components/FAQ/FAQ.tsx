@@ -1,5 +1,4 @@
 import { QUESTIONS } from "@/src/constants/FAQuestions";
-import react from "react";
 import Accordion from "./Accordion";
 
 export default function FAQ() {

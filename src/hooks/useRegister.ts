@@ -26,19 +26,9 @@ export default function useRegister() {
 
   const [registerRequest] = useRegisterRequestMutation();
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
-    try {
-      await registerRequest(data).unwrap();
-      toast.success("Welcome to Task Manager :)");
-      router.push("/");
-    } catch (err: any) {
-      if (err?.status === 422) {
-        toast.error("Check All the fields");
-      } else if (err?.status === 409) {
-        toast.error("User Exists.");
-      } else {
-        toast.error("Try Again Later.");
-      }
-    }
+    await registerRequest(data).unwrap();
+    toast.success("Welcome to Task Manager :)");
+    router.push("/");
   };
 
   return {

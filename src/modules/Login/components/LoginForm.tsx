@@ -4,7 +4,6 @@ import { FormProvider } from "react-hook-form";
 import Input from "../../sharedComponents/Input";
 import Checkbox from "../../sharedComponents/Checkbox";
 import Link from "next/link";
-import toast from "react-hot-toast";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 
 function LoginForm() {

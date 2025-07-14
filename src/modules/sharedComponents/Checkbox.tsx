@@ -5,7 +5,7 @@ function Checkbox({
   checked,
   setChecked,
 }: {
-  label: string;
+  label?: string;
   checked: boolean;
   setChecked: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
@@ -19,7 +19,7 @@ function Checkbox({
         onClick={() => setChecked(!checked)}
       />
       <label htmlFor="remember-me" className="text-sm">
-        مرا به خاطر بسپار
+        {label || "مرا به خاطر بسپار"}
       </label>
     </div>
   );
