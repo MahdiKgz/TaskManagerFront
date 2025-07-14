@@ -27,8 +27,10 @@ function Footer() {
           شبکه های اجتماعی
         </h1>
         <div className="w-fit px-4 flex items-center gap-x-5">
-          {SOCIAL_MEDIA.map(({ link, icon }) => (
-            <Link href={link}>{icon}</Link>
+          {SOCIAL_MEDIA.map(({ link, icon }, index) => (
+            <Link key={index} href={link}>
+              {icon}
+            </Link>
           ))}
         </div>
       </div>
