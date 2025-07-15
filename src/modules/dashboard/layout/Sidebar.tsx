@@ -7,7 +7,7 @@ import LogoutIcon from "@/src/icons/LogoutIcon";
 
 function DashboardSidebar() {
   return (
-    <div className="w-[240px] h-full bg-base-100 rounded-lg px-6 py-4 pb-6">
+    <div className="w-[280px] h-full bg-base-100 rounded-lg px-6 py-4 pb-6">
       <div className="w-full h-full flex flex-col items-start justify-between">
         <div className="w-full flex flex-col items-start gap-6">
           <Link href="/dashboard" className="dashboard-btn">

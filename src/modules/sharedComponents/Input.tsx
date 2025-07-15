@@ -5,9 +5,11 @@ import { useFormContext, RegisterOptions } from "react-hook-form";
 interface InputProps {
   name: string;
   validation?: RegisterOptions;
+  disabled?: boolean;
+  label?: string;
 }
 
-function Input({ name, validation }: InputProps) {
+function Input({ name, validation, disabled = false, label }: InputProps) {
   const {
     register,
     formState: { errors },
@@ -15,6 +17,7 @@ function Input({ name, validation }: InputProps) {
 
   return (
     <div className="w-full flex flex-col items-start gap-y-2">
+      {label && <label className="text-gray-600 text-sm">{label}</label>}
       <input
         className="w-full input focus:input-warning input-lg transition-colors duration-300"
         {...register(name, {
@@ -27,6 +30,7 @@ function Input({ name, validation }: InputProps) {
             ? "password"
             : "text"
         }
+        disabled={disabled}
       />
       <span className="text-xs text-error font-semibold mx-2">
         {errors[name]?.message as React.ReactNode}
