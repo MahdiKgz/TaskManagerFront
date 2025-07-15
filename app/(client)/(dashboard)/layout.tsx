@@ -2,6 +2,11 @@ import React from "react";
 import DashboardHeader from "@/src/modules/dashboard/layout/Header";
 import DashboardSidebar from "@/src/modules/dashboard/layout/Sidebar";
 
+export const metadata = {
+  title: "تسکینو | پنل کاربر",
+  description: "برنامه مدیریت وظایف",
+};
+
 function DashBoardLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="w-full h-full flex flex-col items-start gap-6 p-6 pb-10">
