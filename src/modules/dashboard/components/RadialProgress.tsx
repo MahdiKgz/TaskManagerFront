@@ -8,7 +8,7 @@ interface RadialProgressProps {
 const getClassNames = (type: string) => {
   switch (type) {
     case "completed":
-      return { color: "accent", label: "تکمیل شده" };
+      return { color: "success", label: "تکمیل شده" };
     case "in-progress":
       return { color: "warning", label: "در حال تکمیل" };
     case "todo":
