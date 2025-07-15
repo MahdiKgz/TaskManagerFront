@@ -5,13 +5,14 @@ import { useGetUserOverviewQuery } from "../redux/services/OverViewAPI";
 
 export default function useOverview() {
   const { user } = useSelector((state: RootState) => state.auth);
-  const { data: overViews } = useGetUserOverviewQuery({
-    userID: user?._id as string,
-  });
+  const { data: overViews, isLoading: isOverViewLoading } =
+    useGetUserOverviewQuery({
+      userID: user?._id as string,
+    });
 
   const methods = useForm({ defaultValues: { ...user } });
 
-  let disabled = true;
+  const disabled = true;
 
-  return { methods, disabled, overViews };
+  return { methods, disabled, overViews, isOverViewLoading };
 }

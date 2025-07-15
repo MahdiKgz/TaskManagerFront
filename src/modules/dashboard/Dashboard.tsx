@@ -3,9 +3,10 @@ import React from "react";
 import { FormProvider } from "react-hook-form";
 import Input from "../sharedComponents/Input";
 import RadialProgress from "./components/RadialProgress";
+import Loading from "../sharedComponents/Loading";
 
 function DashboardModule() {
-  const { methods, disabled, overViews } = useOverview();
+  const { methods, disabled, overViews, isOverViewLoading } = useOverview();
 
   return (
     <FormProvider {...methods}>
@@ -21,9 +22,11 @@ function DashboardModule() {
         <div className="w-full flex items-start flex-col gap-6">
           <h1 className="font-bold text-2xl">وضعیت تسک ها</h1>
           <div className="w-full flex items-start gap-5 justify-around">
-            {overViews?.map(({ type, value }, index) => (
-              <RadialProgress key={index} type={type} value={value} />
-            ))}
+            {isOverViewLoading && <Loading />}
+            {!isOverViewLoading &&
+              overViews?.map(({ type, value }, index) => (
+                <RadialProgress key={index} type={type} value={value} />
+              ))}
           </div>
         </div>
       </form>
