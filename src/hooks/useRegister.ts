@@ -22,13 +22,15 @@ export default function useRegister() {
   const {
     handleSubmit,
     formState: { isValid },
+    reset,
   } = methods;
 
   const [registerRequest] = useRegisterRequestMutation();
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
     await registerRequest(data).unwrap();
     toast.success("Welcome to Task Manager :)");
-    router.push("/");
+    router.push("/dashboard");
+    reset()
   };
 
   return {

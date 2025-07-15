@@ -21,7 +21,7 @@ function DashboardModule() {
         </div>
         <div className="w-full flex items-start flex-col gap-6">
           <h1 className="font-bold text-2xl">وضعیت تسک ها</h1>
-          <div className="w-full flex items-start gap-5 justify-around">
+          <div className="w-full flex flex-col md:flex-row flex-wrap items-start gap-5 justify-around">
             {isOverViewLoading && <Loading />}
             {!isOverViewLoading &&
               overViews?.map(({ type, value }, index) => (
