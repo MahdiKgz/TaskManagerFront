@@ -18,6 +18,7 @@ export default function useLogin() {
   const {
     handleSubmit,
     formState: { isValid },
+    reset,
   } = methods;
 
   const [loginRequest] = useLoginRequestMutation();
@@ -25,7 +26,8 @@ export default function useLogin() {
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
     await loginRequest(data);
     toast.success("Welcome Back to Task Manager :)");
-    setTimeout(() => router.push("/"), 1500);
+    setTimeout(() => router.push("/dashboard"), 1500);
+    reset();
   };
   return { methods, isValid, handleSubmit, checked, setChecked, onSubmit };
 }

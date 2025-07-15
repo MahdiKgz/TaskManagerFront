@@ -22,7 +22,7 @@ function RadialProgress({ value, type }: RadialProgressProps) {
   const { color, label } = getClassNames(type);
 
   return (
-    <div className="w-[300px] h-fit px-6 py-8 flex flex-col items-center gap-4 bg-base-200/50 rounded-lg shadow-lg">
+    <div className="w-full sm:w-[300px] h-fit px-6 py-8 flex flex-col items-center gap-6 sm:gap-4 bg-base-200/50 rounded-lg shadow-lg">
       <div
         className={`radial-progress text-${color}`}
         style={{ "--value": value, "--size": "10rem" } as React.CSSProperties}
