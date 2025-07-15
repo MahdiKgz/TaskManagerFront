@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { useGetUserOverviewQuery } from "../redux/services/OverViewAPI";
 
 export default function useOverview() {
   const { user } = useSelector((state: RootState) => state.auth);
+  const { data: overViews } = useGetUserOverviewQuery({
+    userID: user?._id as string,
+  });
+
   const methods = useForm({ defaultValues: { ...user } });
 
-  const { handleSubmit } = methods;
   let disabled = true;
 
-  const onSubmit = async (data: unknown) => {
-    console.log(data);
-  };
-
-  return { methods, disabled, handleSubmit, onSubmit };
+  return { methods, disabled, overViews };
 }

@@ -5,13 +5,11 @@ import Input from "../sharedComponents/Input";
 import RadialProgress from "./components/RadialProgress";
 
 function DashboardModule() {
-  const { methods, handleSubmit, onSubmit, disabled } = useOverview();
+  const { methods, disabled, overViews } = useOverview();
+
   return (
     <FormProvider {...methods}>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="flex items-start flex-col gap-20"
-      >
+      <form className="flex items-start flex-col gap-20">
         <div className="w-full flex items-start flex-col gap-6">
           <h1 className="font-bold text-2xl">اطلاعات شخصی</h1>
           <div className="w-full flex flex-col sm:flex-row items-start gap-8">
@@ -23,9 +21,9 @@ function DashboardModule() {
         <div className="w-full flex items-start flex-col gap-6">
           <h1 className="font-bold text-2xl">وضعیت تسک ها</h1>
           <div className="w-full flex items-start gap-5 justify-around">
-            <RadialProgress type="todo" value={10} />
-            <RadialProgress type="completed" value={50} />
-            <RadialProgress type="in-progress" value={40} />
+            {overViews?.map(({ type, value }, index) => (
+              <RadialProgress key={index} type={type} value={value} />
+            ))}
           </div>
         </div>
       </form>

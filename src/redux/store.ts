@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 
 import { AuthApi } from "./services/AuthAPI";
 import authReducer from "./slices/authSlice";
+import { overViewAPI } from "./services/OverViewAPI";
 
 const persistConfig = {
   key: "auth",
@@ -24,6 +25,7 @@ const persistConfig = {
 // Combine reducers
 const rootReducer = combineReducers({
   [AuthApi.reducerPath]: AuthApi.reducer,
+  [overViewAPI.reducerPath]: overViewAPI.reducer,
   auth: authReducer,
 });
 
@@ -38,7 +40,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(AuthApi.middleware),
+    }).concat(AuthApi.middleware, overViewAPI.middleware),
   devTools: process.env.NODE_ENV !== "production",
 });
 
