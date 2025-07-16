@@ -24,7 +24,7 @@ function LoginForm() {
   const router = useRouter();
 
   useEffect(() => {
-    if (user === null) {
+    if (user !== null) {
       router.push("/dashboard");
     }
   }, [user]);

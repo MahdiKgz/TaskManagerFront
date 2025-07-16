@@ -17,7 +17,7 @@ function DashboardModule() {
 
   useEffect(() => {
     if (user === null) {
-      router.push("/dashboard");
+      router.push("/login");
     }
   }, [user]);
 
