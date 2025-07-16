@@ -31,6 +31,7 @@ export default function useLogin() {
     try {
       const response = await loginRequest(data).unwrap();
       dispatch(setUser(response));
+      toast.success("با موفقیت وارد شدید.");
       router.push("/dashboard");
     } catch (err) {
       // @ts-expect-error err is unknown or any

@@ -34,6 +34,7 @@ export default function useRegister() {
     try {
       const response = await registerRequest(data).unwrap();
       dispatch(setUser(response));
+      toast.success("ثبت نام با موفقیت انجام شد.");
       router.push("/dashboard");
     } catch (err: unknown) {
       // @ts-expect-error err is unknown or any
