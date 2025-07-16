@@ -40,7 +40,7 @@ function RegisterForm() {
           <div className="w-full flex items-center justify-start gap-x-1 text-sm">
             <span>حساب دارید؟</span>
             <Link
-              href="/Login"
+              href="/login"
               className="text-warning hover:text-amber-300 duration-300"
             >
               ورود به حساب
