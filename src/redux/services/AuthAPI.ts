@@ -1,6 +1,8 @@
 import { ILogin, IRegister, UserWithoutConfirm } from "@/src/types/Auth.types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setUser } from "../slices/authSlice";
+import { setAuthCookie } from "@/app/actions/auth";
+import toast from "react-hot-toast";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
@@ -28,6 +30,11 @@ export const AuthApi = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         const { data } = await queryFulfilled;
         dispatch(setUser(data));
+        if (data && (data as any).token) {
+          await setAuthCookie((data as any).token);
+        } else {
+          toast.error("ورود ناموفق");
+        }
       },
     }),
   }),
