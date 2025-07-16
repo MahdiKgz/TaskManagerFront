@@ -22,6 +22,7 @@ export default function useRegister() {
   const {
     handleSubmit,
     formState: { isValid },
+    reset,
   } = methods;
 
   const [registerRequest] = useRegisterRequestMutation();

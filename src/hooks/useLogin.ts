@@ -18,12 +18,15 @@ export default function useLogin() {
   const {
     handleSubmit,
     formState: { isValid },
+    reset,
   } = methods;
 
   const [loginRequest] = useLoginRequestMutation();
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
+
     await loginRequest(data).unwrap();
+
   };
   return { methods, isValid, handleSubmit, checked, setChecked, onSubmit };
 }
