@@ -40,7 +40,7 @@ export default function useRegister() {
       // @ts-expect-error err is unknown
       toast.error(err.data.message);
       }
-    }
+    
   };
 
   return {
