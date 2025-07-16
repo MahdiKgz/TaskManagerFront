@@ -7,8 +7,15 @@ import useRegister from "@/src/hooks/useRegister";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 
 function RegisterForm() {
-  const { methods, handleSubmit, checked, setChecked, onSubmit, isValid } =
-    useRegister();
+  const {
+    methods,
+    handleSubmit,
+    checked,
+    setChecked,
+    onSubmit,
+    isValid,
+    isSubmittingForm,
+  } = useRegister();
 
   return (
     <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center justify-center sm:justify-normal sm:rounded-xl">
@@ -33,14 +40,14 @@ function RegisterForm() {
           />
           <button
             className="w-full btn btn-soft btn-warning"
-            disabled={!isValid}
+            disabled={!isValid || isSubmittingForm}
           >
             ثبت نام
           </button>
           <div className="w-full flex items-center justify-start gap-x-1 text-sm">
             <span>حساب دارید؟</span>
             <Link
-              href="/Login"
+              href="/login"
               className="text-warning hover:text-amber-300 duration-300"
             >
               ورود به حساب

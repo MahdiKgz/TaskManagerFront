@@ -7,8 +7,15 @@ import Link from "next/link";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 
 function LoginForm() {
-  const { methods, handleSubmit, isValid, checked, setChecked, onSubmit } =
-    useLogin();
+  const {
+    methods,
+    handleSubmit,
+    isValid,
+    checked,
+    setChecked,
+    onSubmit,
+    isSubmittingForm,
+  } = useLogin();
 
   return (
     <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center justify-center sm:justify-normal sm:rounded-xl">
@@ -27,7 +34,7 @@ function LoginForm() {
           />
           <button
             className="w-full btn btn-soft btn-warning"
-            disabled={!isValid}
+            disabled={!isValid || isSubmittingForm}
           >
             ورود
           </button>

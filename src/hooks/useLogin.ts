@@ -1,32 +1,50 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { useLoginRequestMutation } from "../redux/services/AuthAPI";
 import { ILogin } from "../types/Auth.types";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/slices/authSlice";
+import toast from "react-hot-toast";
 
 export default function useLogin() {
   const router = useRouter();
-  const methods = useForm<{ username: string; password: string }>({
+  const dispatch = useDispatch();
+  const [checked, setChecked] = useState<boolean>(false);
+
+  const methods = useForm<ILogin>({
     defaultValues: {
       username: "",
       password: "",
     },
   });
 
-  const [checked, setChecked] = useState<boolean>(false);
   const {
     handleSubmit,
     formState: { isValid },
-    reset,
   } = methods;
 
-  const [loginRequest] = useLoginRequestMutation();
+  const [loginRequest, { isLoading: isSubmittingForm }] =
+    useLoginRequestMutation();
 
   const onSubmit: SubmitHandler<ILogin> = async (data) => {
-
-    await loginRequest(data).unwrap();
-
+    try {
+      const response = await loginRequest(data).unwrap();
+      dispatch(setUser(response));
+      router.push("/dashboard");
+    } catch (err) {
+      // @ts-expect-error
+      toast.error(err.error?.data?.message || "Login failed");
+    }
   };
-  return { methods, isValid, handleSubmit, checked, setChecked, onSubmit };
+
+  return {
+    methods,
+    handleSubmit,
+    isValid,
+    checked,
+    setChecked,
+    onSubmit,
+    isSubmittingForm,
+  };
 }
