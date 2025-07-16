@@ -1,12 +1,25 @@
 import useOverview from "@/src/hooks/useOverview";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import Input from "../sharedComponents/Input";
 import RadialProgress from "./components/RadialProgress";
 import Loading from "../sharedComponents/Loading";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
+import { useRouter } from "next/navigation";
 
 function DashboardModule() {
   const { methods, disabled, overViews, isOverViewLoading } = useOverview();
+
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user === null) {
+      router.push("/dashboard");
+    }
+  }, [user]);
 
   return (
     <FormProvider {...methods}>
