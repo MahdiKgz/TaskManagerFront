@@ -36,9 +36,10 @@ export default function useRegister() {
       dispatch(setUser(response));
       toast.success("ثبت نام با موفقیت انجام شد.");
       router.push("/dashboard");
-    } catch (err: unknown) {
-      // @ts-expect-error err is unknown or any
-      toast.error(err.error?.data?.message as string);
+    } catch (err) {
+      // @ts-expect-error err is unknown
+      toast.error(err.data.message);
+      }
     }
   };
 

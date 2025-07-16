@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/slices/authSlice";
 import toast from "react-hot-toast";
+import { error } from "console";
 
 export default function useLogin() {
   const router = useRouter();
@@ -34,8 +35,8 @@ export default function useLogin() {
       toast.success("با موفقیت وارد شدید.");
       router.push("/dashboard");
     } catch (err) {
-      // @ts-expect-error err is unknown or any
-      toast.error(err.error?.data?.message);
+      // @ts-expect-error err is unknown
+      toast.error(err.data.message);
     }
   };
 
