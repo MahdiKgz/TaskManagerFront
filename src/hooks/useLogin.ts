@@ -33,8 +33,8 @@ export default function useLogin() {
       dispatch(setUser(response));
       router.push("/dashboard");
     } catch (err) {
-      // @ts-expect-error
-      toast.error(err.error?.data?.message || "Login failed");
+      // @ts-expect-error err is unknown or any
+      toast.error(err.error?.data?.message);
     }
   };
 

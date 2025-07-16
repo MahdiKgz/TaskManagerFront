@@ -1,7 +1,5 @@
 import { ILogin, IRegister, UserWithoutConfirm } from "@/src/types/Auth.types";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { setUser } from "../slices/authSlice";
-import toast from "react-hot-toast";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",

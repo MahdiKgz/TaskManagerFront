@@ -36,7 +36,7 @@ export default function useRegister() {
       dispatch(setUser(response));
       router.push("/dashboard");
     } catch (err: unknown) {
-      // @ts-expect-error
+      // @ts-expect-error err is unknown or any
       toast.error(err.error?.data?.message as string);
     }
   };
