@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { setUser } from "../redux/slices/authSlice";
 import toast from "react-hot-toast";
-import { error } from "console";
 
 export default function useLogin() {
   const router = useRouter();
