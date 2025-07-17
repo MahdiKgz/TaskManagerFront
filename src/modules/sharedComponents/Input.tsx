@@ -16,17 +16,21 @@ function Input({ name, validation, disabled = false, label }: InputProps) {
   } = useFormContext();
 
   return (
-    <div className="w-full flex flex-col items-start gap-y-2">
-      {label && <label className="text-gray-600 text-sm">{label}</label>}
+    <div className="w-full flex flex-col items-start gap-y-2 group">
+      {label && (
+        <label className="text-gray-600 group-focus-within:text-white text-sm transition-colors duration-100">
+          {label}
+        </label>
+      )}
       <input
-        className="w-full input focus:input-warning input-lg transition-colors duration-300"
+        className="w-full input focus:input-warning input-lg transition-colors duration-300 !outline-none"
         {...register(name, {
           required: "this field is required",
           ...validation,
         })} // Spread the validation prop
         placeholder={PLACEHOLDER[name]}
         type={
-          name === "password" || name === "confirmPassword"
+          name.includes("password") || name.includes("Password")
             ? "password"
             : "text"
         }
