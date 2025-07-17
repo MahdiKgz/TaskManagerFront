@@ -4,23 +4,22 @@ import { FormProvider } from "react-hook-form";
 import Input from "../sharedComponents/Input";
 import RadialProgress from "./components/RadialProgress";
 import Loading from "../sharedComponents/Loading";
-import { useRouter, useSearchParams } from "next/navigation";
-import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
+import { useRouter } from "next/navigation";
 
 function DashboardModule() {
   const { methods, disabled, overViews, isOverViewLoading } = useOverview();
-  const searchParams = useSearchParams();
+
+  const { user } = useSelector((state: RootState) => state.auth);
+
   const router = useRouter();
 
   useEffect(() => {
-    const toastMessage = searchParams.get("toastMessage");
-    if (toastMessage === "alreadyLoggedIn") {
-      toast.error("شما قبلا با نام کاربری خود وارد شده اید!");
-      const newSearchParams = new URLSearchParams(searchParams.toString());
-      newSearchParams.delete("toastMessage");
-      router.replace(`/dashboard?${newSearchParams.toString()}`);
+    if (user === null) {
+      router.push("/login");
     }
-  }, [searchParams, router]);
+  }, [user]);
 
   return (
     <FormProvider {...methods}>

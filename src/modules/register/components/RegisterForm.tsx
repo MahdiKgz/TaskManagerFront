@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import Input from "../../sharedComponents/Input";
 import Checkbox from "../../sharedComponents/Checkbox";
 import Link from "next/link";
 import useRegister from "@/src/hooks/useRegister";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
+import { useRouter } from "next/navigation";
 
 function RegisterForm() {
-  const { methods, handleSubmit, checked, setChecked, onSubmit, isValid } =
-    useRegister();
+  const {
+    methods,
+    handleSubmit,
+    checked,
+    setChecked,
+    onSubmit,
+    isValid,
+    isSubmittingForm,
+  } = useRegister();
+
+  const { user } = useSelector((state: RootState) => state.auth);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (user !== null) {
+      router.push("/dashboard");
+    }
+  }, [user]);
 
   return (
     <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center justify-center sm:justify-normal sm:rounded-xl">
@@ -33,7 +53,7 @@ function RegisterForm() {
           />
           <button
             className="w-full btn btn-soft btn-warning"
-            disabled={!isValid}
+            disabled={!isValid || isSubmittingForm}
           >
             ثبت نام
           </button>

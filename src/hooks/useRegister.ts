@@ -1,12 +1,17 @@
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import { IRegister } from "../types/Auth.types";
 import { useRegisterRequestMutation } from "../redux/services/AuthAPI";
+import { IRegister } from "../types/Auth.types";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import { setUser } from "../redux/slices/authSlice";
+import toast from "react-hot-toast";
 
 export default function useRegister() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [checked, setChecked] = useState<boolean>(false);
+
   const methods = useForm<IRegister>({
     defaultValues: {
       name: "",
@@ -17,25 +22,34 @@ export default function useRegister() {
     },
   });
 
-  const [checked, setChecked] = useState<boolean>(false);
-
   const {
     handleSubmit,
     formState: { isValid },
-    reset,
   } = methods;
 
-  const [registerRequest] = useRegisterRequestMutation();
+  const [registerRequest, { isLoading: isSubmittingForm }] =
+    useRegisterRequestMutation();
+
   const onSubmit: SubmitHandler<IRegister> = async (data) => {
-    await registerRequest(data).unwrap();
+    try {
+      const response = await registerRequest(data).unwrap();
+      dispatch(setUser(response));
+      toast.success("ثبت نام با موفقیت انجام شد.");
+      router.push("/dashboard");
+    } catch (err) {
+      // @ts-expect-error err is unknown
+      toast.error(err.data.message);
+      }
+    
   };
 
   return {
     methods,
     handleSubmit,
+    isValid,
     checked,
     setChecked,
     onSubmit,
-    isValid,
+    isSubmittingForm,
   };
 }

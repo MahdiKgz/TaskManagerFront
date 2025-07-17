@@ -5,23 +5,29 @@ import Input from "../../sharedComponents/Input";
 import Checkbox from "../../sharedComponents/Checkbox";
 import Link from "next/link";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
-import toast from "react-hot-toast";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
+import { useRouter } from "next/navigation";
 
 function LoginForm() {
-  const { methods, handleSubmit, isValid, checked, setChecked, onSubmit } =
-    useLogin();
-  const searchParams = useSearchParams();
+  const {
+    methods,
+    handleSubmit,
+    isValid,
+    checked,
+    setChecked,
+    onSubmit,
+    isSubmittingForm,
+  } = useLogin();
+
+  const { user } = useSelector((state: RootState) => state.auth);
   const router = useRouter();
+
   useEffect(() => {
-    const toastMessage = searchParams.get("toastMessage");
-    if (toastMessage === "mustLoggedIn") {
-      toast.error("ابتدا وارد حساب کاربری خود شوید!");
-      const newSearchParams = new URLSearchParams(searchParams.toString());
-      newSearchParams.delete("toastMessage");
-      router.replace(`/login?${newSearchParams.toString()}`);
+    if (user !== null) {
+      router.push("/dashboard");
     }
-  }, [searchParams, router]);
+  }, [user]);
 
   return (
     <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center justify-center sm:justify-normal sm:rounded-xl">
@@ -40,7 +46,7 @@ function LoginForm() {
           />
           <button
             className="w-full btn btn-soft btn-warning"
-            disabled={!isValid}
+            disabled={!isValid || isSubmittingForm}
           >
             ورود
           </button>
