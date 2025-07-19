@@ -1,12 +1,12 @@
 import CloseIcon from "@/src/icons/CloseIcon";
 import DashboardIcon from "@/src/icons/DashboardIcon";
-import LogoutIcon from "@/src/icons/LogoutIcon";
 import ProfileIcon from "@/src/icons/ProfileIcon";
 import TaskIcon from "@/src/icons/TaskIcon";
 import { RootState } from "@/src/redux/store";
 import Link from "next/link";
 import React from "react";
 import { useSelector } from "react-redux";
+import Logout from "../components/Logout";
 
 function MobileSidebar({
   setOpen,
@@ -55,10 +55,7 @@ function MobileSidebar({
             </Link>
           </div>
         </div>
-        <button className="logout-btn">
-          <LogoutIcon />
-          خروج از حساب
-        </button>
+        <Logout/>
       </div>
       <div
         onClick={() => setOpen(false)}
