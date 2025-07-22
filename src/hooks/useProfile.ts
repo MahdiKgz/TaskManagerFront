@@ -1,10 +1,9 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-import { UserWithoutConfirm } from "../types/Auth.types";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { useState } from "react";
 
-export default function userProfile() {
+export default function useProfile() {
   const { user } = useSelector((state: RootState) => state.auth);
   const methods = useForm({
     defaultValues: {

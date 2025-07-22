@@ -1,6 +1,6 @@
 import React from "react";
 import { FormProvider } from "react-hook-form";
-import userProfile from "@/src/hooks/useProfile";
+import useProfile from "@/src/hooks/useProfile";
 import Input from "../sharedComponents/Input";
 import EditUserIcon from "@/src/icons/EditUserIcon";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
@@ -17,7 +17,7 @@ function ProfileModule() {
     changePasswordButtonDisabled,
     openModal,
     setOpenModal,
-  } = userProfile();
+  } = useProfile();
   return (
     <FormProvider {...methods}>
       <form

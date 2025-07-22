@@ -19,7 +19,7 @@ function DashboardModule() {
     if (user === null) {
       router.push("/login");
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <FormProvider {...methods}>

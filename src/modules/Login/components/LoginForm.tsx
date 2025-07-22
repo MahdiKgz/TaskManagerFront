@@ -27,7 +27,7 @@ function LoginForm() {
     if (user !== null) {
       router.push("/dashboard");
     }
-  }, [user]);
+  }, [user, router]);
 
   return (
     <div className="relative z-10 w-full sm:w-[480px] h-full sm:h-auto bg-base-100/60 sm:bg-base-100 px-4.5 py-8 flex flex-col items-center justify-center sm:justify-normal sm:rounded-xl">
