@@ -5,10 +5,19 @@ import Input from "../sharedComponents/Input";
 import EditUserIcon from "@/src/icons/EditUserIcon";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 import EditPasswordIcon from "@/src/icons/EditPasswordIcon";
+import ConfirmModal from "./components/ConfirmModal";
 
 function ProfileModule() {
-  const { methods, onSumbit, handleSubmit, editMode, setEditMode } =
-    userProfile();
+  const {
+    methods,
+    onSumbit,
+    handleSubmit,
+    editMode,
+    setEditMode,
+    changePasswordButtonDisabled,
+    openModal,
+    setOpenModal,
+  } = userProfile();
   return (
     <FormProvider {...methods}>
       <form
@@ -35,7 +44,12 @@ function ProfileModule() {
           <h1 className="w-full font-bold text-xl sm:text-2xl">
             تغییر رمز عبور
           </h1>
-          <div className="w-full flex flex-col sm:flex-row items-center gap-8">
+          <div className="w-full flex flex-col sm:flex-row items-end gap-8">
+            <Input
+              validation={VALIDATION_RULES.password}
+              name="password"
+              label="رمز عبور فعلی:"
+            />
             <Input
               validation={VALIDATION_RULES.password}
               name="newPassword"
@@ -48,11 +62,14 @@ function ProfileModule() {
             />
             <button
               type="button"
-              className="btn btn-primary btn-md lg:btn-lg btn-wide"
+              onClick={() => setOpenModal(false)}
+              className="btn btn-primary btn-md btn-wide my-auto"
+              disabled={changePasswordButtonDisabled}
             >
               <EditPasswordIcon />
               تغییر رمز عبور
             </button>
+            {openModal && <ConfirmModal />}
           </div>
         </div>
       </form>
