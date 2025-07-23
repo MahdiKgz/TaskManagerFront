@@ -8,6 +8,7 @@ import EditPasswordIcon from "@/src/icons/EditPasswordIcon";
 import ConfirmModal from "./components/ConfirmModal";
 
 function ProfileModule() {
+  
   const {
     methods,
     onSumbit,
@@ -18,6 +19,7 @@ function ProfileModule() {
     openModal,
     setOpenModal,
   } = useProfile();
+  
   return (
     <FormProvider {...methods}>
       <form
@@ -62,14 +64,14 @@ function ProfileModule() {
             />
             <button
               type="button"
-              onClick={() => setOpenModal(false)}
+              onClick={() => setOpenModal(!openModal)}
               className="btn btn-primary btn-md btn-wide my-auto"
               disabled={changePasswordButtonDisabled}
             >
               <EditPasswordIcon />
               تغییر رمز عبور
             </button>
-            {openModal && <ConfirmModal />}
+            {openModal && <ConfirmModal openModal={openModal} setOpenModal={setOpenModal}><div className="bg-red-600 w-40 h-20 text-3xl">mahsa</div></ConfirmModal>}
           </div>
         </div>
       </form>
