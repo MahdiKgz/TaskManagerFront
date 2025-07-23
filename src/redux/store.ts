@@ -13,6 +13,7 @@ import storage from "redux-persist/lib/storage";
 
 import { AuthApi } from "./services/AuthAPI";
 import authReducer from "./slices/authSlice";
+import modalReducer from "./slices/modalSlice";
 import { overViewAPI } from "./services/OverViewAPI";
 
 const persistConfig = {
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
   [AuthApi.reducerPath]: AuthApi.reducer,
   [overViewAPI.reducerPath]: overViewAPI.reducer,
   auth: authReducer,
+  modal: modalReducer,
 });
 
 // Create persisted reducer

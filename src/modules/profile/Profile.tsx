@@ -6,24 +6,27 @@ import EditUserIcon from "@/src/icons/EditUserIcon";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 import EditPasswordIcon from "@/src/icons/EditPasswordIcon";
 import ConfirmModal from "./components/ConfirmModal";
+import ChangePassword from "./components/ChangePassword";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
+import { open } from "@/src/redux/slices/modalSlice";
 
 function ProfileModule() {
-  
   const {
     methods,
-    onSumbit,
+    onSubmit,
     handleSubmit,
     editMode,
     setEditMode,
     changePasswordButtonDisabled,
-    openModal,
-    setOpenModal,
   } = useProfile();
-  
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.modal.isOpen);
+
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={handleSubmit(onSumbit)}
+        onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col items-start gap-10 sm:gap-8"
       >
         <div className="w-full h-10 flex items-center justify-between">
@@ -64,14 +67,18 @@ function ProfileModule() {
             />
             <button
               type="button"
-              onClick={() => setOpenModal(!openModal)}
+              onClick={() => dispatch(open())}
               className="btn btn-primary btn-md btn-wide my-auto"
               disabled={changePasswordButtonDisabled}
             >
               <EditPasswordIcon />
               تغییر رمز عبور
             </button>
-            {openModal && <ConfirmModal openModal={openModal} setOpenModal={setOpenModal}><div className="bg-red-600 w-40 h-20 text-3xl">mahsa</div></ConfirmModal>}
+            {isOpen && (
+              <ConfirmModal>
+                <ChangePassword />
+              </ConfirmModal>
+            )}
           </div>
         </div>
       </form>

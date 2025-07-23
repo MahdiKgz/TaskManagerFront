@@ -20,11 +20,11 @@ export default function useProfile() {
   const newPassword = watch("newPassword");
   const confirmNewPassword = watch("confirmNewPassword");
 
-  const onSumbit = (data: unknown) => {
-    console.log(data);
+  const onSubmit = (data: unknown) => {
+    console.log("data",data);
   };
   const [editMode, setEditMode] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  // const [openModal, setOpenModal] = useState(false);
 
   let changePasswordButtonDisabled = true;
 
@@ -39,11 +39,11 @@ export default function useProfile() {
   return {
     methods,
     handleSubmit,
-    onSumbit,
+    onSubmit,
     editMode,
     setEditMode,
     changePasswordButtonDisabled,
-    openModal,
-    setOpenModal,
+    // openModal,
+    // setOpenModal,
   };
 }
