@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import useProfile from "@/src/hooks/useProfile";
 import Input from "../sharedComponents/Input";
@@ -10,6 +10,7 @@ import ChangePassword from "./components/ChangePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
 import { open } from "@/src/redux/slices/modalSlice";
+import { UserWithoutConfirm } from "@/src/types/Auth.types";
 
 function ProfileModule() {
   const {
@@ -22,7 +23,14 @@ function ProfileModule() {
   } = useProfile();
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);
-
+  const [passwordDataForModal, setPasswordDataForModal] = useState<UserWithoutConfirm >({});
+  const handleOpenChangePasswordModal = () => {
+    const currentPasswordData:UserWithoutConfirm = methods.getValues();
+    if (!changePasswordButtonDisabled) {
+      setPasswordDataForModal(currentPasswordData);
+      dispatch(open());
+    }
+  };
   return (
     <FormProvider {...methods}>
       <form
@@ -67,7 +75,7 @@ function ProfileModule() {
             />
             <button
               type="button"
-              onClick={() => dispatch(open())}
+              onClick={handleOpenChangePasswordModal}
               className="btn btn-primary btn-md btn-wide my-auto"
               disabled={changePasswordButtonDisabled}
             >
@@ -76,10 +84,11 @@ function ProfileModule() {
             </button>
             {isOpen && (
               <ConfirmModal>
-                <ChangePassword />
+                <ChangePassword passwordDataForModal={passwordDataForModal} />
               </ConfirmModal>
             )}
           </div>
+          <button type="submit">ثبت نهایی</button>
         </div>
       </form>
     </FormProvider>
