@@ -23,9 +23,10 @@ function ProfileModule() {
   } = useProfile();
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);
-  const [passwordDataForModal, setPasswordDataForModal] = useState<UserWithoutConfirm >({});
+  const [passwordDataForModal, setPasswordDataForModal] =
+    useState<UserWithoutConfirm>({});
   const handleOpenChangePasswordModal = () => {
-    const currentPasswordData:UserWithoutConfirm = methods.getValues();
+    const currentPasswordData: UserWithoutConfirm = methods.getValues();
     if (!changePasswordButtonDisabled) {
       setPasswordDataForModal(currentPasswordData);
       dispatch(open());
@@ -48,10 +49,18 @@ function ProfileModule() {
             ویرایش پروفایل
           </button>
         </div>
-        <div className="w-full flex flex-col sm:flex-row items-start gap-8">
-          <Input disabled={!editMode} name="name" label="نام:" />
-          <Input disabled={!editMode} name="username" label="نام کاربری:" />
-          <Input disabled={!editMode} name="email" label="ایمیل:" />
+        <div className="w-full flex flex-col justify-end items-start gap-8">
+          <span className="w-full flex flex-col sm:flex-row items-center justify-between h-full">
+            <Input disabled={!editMode} name="name" label="نام:" />
+            <Input disabled={!editMode} name="username" label="نام کاربری:" />
+            <Input disabled={!editMode} name="email" label="ایمیل:" />
+          </span>
+          <button
+            className="btn btn-sm sm:btn-md btn-primary flex items-center justify-center gap-2"
+            type="submit"
+          >
+            ثبت نهایی
+          </button>
         </div>
         <div className="w-full flex flex-col items-start gap-10 sm:gap-8">
           <h1 className="w-full font-bold text-xl sm:text-2xl">
@@ -82,13 +91,13 @@ function ProfileModule() {
               <EditPasswordIcon />
               تغییر رمز عبور
             </button>
+
             {isOpen && (
               <ConfirmModal>
                 <ChangePassword passwordDataForModal={passwordDataForModal} />
               </ConfirmModal>
             )}
           </div>
-          <button type="submit">ثبت نهایی</button>
         </div>
       </form>
     </FormProvider>

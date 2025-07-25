@@ -1,7 +1,10 @@
+"use client";
+
 import { close } from "@/src/redux/slices/modalSlice";
 import { ReactNode, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { motion } from "framer-motion"
 
 interface IModalProps {
   children: ReactNode;
@@ -22,10 +25,20 @@ const ConfirmModal: React.FC<IModalProps> = ({ children }) => {
   };
 
   return createPortal(
+    
+
     <div
       onClick={handleClickOverlay}
       onKeyDown={handleKeyDown}
       className="justify-center items-center fixed text-base-100 z-40 inset-0 brightness-75 backdrop-blur-sm flex w-full h-screen "
+    >
+      <motion.div
+      initial={{opacity: 0}}
+      animate={{
+        opacity: 1,
+      
+	  transition:{duration:1,      staggerChildren: 0.2}
+      }}
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -37,9 +50,12 @@ const ConfirmModal: React.FC<IModalProps> = ({ children }) => {
         >
           +
         </div>
+        
         <div className="flex w-full h-full flex-col">{children}</div>
       </div>
-    </div>,
+      </motion.div>
+    </div>
+,
     document.body
   );
 };
