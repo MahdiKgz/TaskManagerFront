@@ -10,7 +10,7 @@ import ChangePassword from "./components/ChangePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
 import { open } from "@/src/redux/slices/modalSlice";
-import { UserWithoutConfirm } from "@/src/types/Auth.types";
+import { IEditPasswordBody, UserWithoutConfirm } from "@/src/types/Auth.types";
 
 function ProfileModule() {
   const {
@@ -24,14 +24,19 @@ function ProfileModule() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);
   const [passwordDataForModal, setPasswordDataForModal] =
-    useState<UserWithoutConfirm>({});
+    useState<IEditPasswordBody|undefined>(undefined);
   const handleOpenChangePasswordModal = () => {
-    const currentPasswordData: UserWithoutConfirm = methods.getValues();
-    if (!changePasswordButtonDisabled) {
+const currentPasswordData: IEditPasswordBody = {
+      password: methods.getValues("password"),
+      newPassword: methods.getValues("newPassword"),
+      confirmNewPassword: methods.getValues("confirmNewPassword"),
+    }  
+      if (!changePasswordButtonDisabled) {
       setPasswordDataForModal(currentPasswordData);
       dispatch(open());
     }
   };
+  
   return (
     <FormProvider {...methods}>
       <form
@@ -50,7 +55,7 @@ function ProfileModule() {
           </button>
         </div>
         <div className="w-full flex flex-col justify-end items-start gap-8">
-          <span className="w-full flex flex-col sm:flex-row items-center justify-between h-full">
+          <span className="w-full flex flex-col sm:flex-row items-center justify-between h-full gap-5">
             <Input disabled={!editMode} name="name" label="نام:" />
             <Input disabled={!editMode} name="username" label="نام کاربری:" />
             <Input disabled={!editMode} name="email" label="ایمیل:" />
@@ -71,6 +76,7 @@ function ProfileModule() {
               validation={VALIDATION_RULES.password}
               name="password"
               label="رمز عبور فعلی:"
+              autoComplete="off"
             />
             <Input
               validation={VALIDATION_RULES.password}

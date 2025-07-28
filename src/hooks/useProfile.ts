@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { editPasswordThunk } from "../redux/slices/PasswordSlice";
+import { useEditPasswordRequestMutation } from "../redux/services/AuthAPI";
+import toast from "react-hot-toast";
+import { IEditPasswordBody } from "../types/Auth.types";
 
 export default function useProfile() {
   const { user } = useSelector((state: RootState) => state.auth);
@@ -16,8 +18,9 @@ export default function useProfile() {
     },
   });
 
-  const { handleSubmit, watch } = methods;
-
+  const { handleSubmit, watch, reset: resetForm } = methods;
+  const [editPasswordMutation, { isLoading,reset: resetMutationState }] =
+    useEditPasswordRequestMutation();
   const password = watch("password");
   const newPassword = watch("newPassword");
   const confirmNewPassword = watch("confirmNewPassword");
@@ -25,8 +28,31 @@ export default function useProfile() {
   const onSubmit = (data: unknown) => {
     console.log("data", data);
   };
-  const editPassword = async (data: any) => {
-    return dispatch(editPasswordThunk(data));
+  const editPassword = async (passwordData: IEditPasswordBody) => {
+    if (!user?._id) {
+      toast.error("شناسه کاربری یافت نشد. لطفاً دوباره وارد شوید.");
+      return;
+    }
+
+    try {
+      const response = await editPasswordMutation({
+        userId: user._id,
+        passwordData,
+      }).unwrap();
+
+      toast.success("رمز عبور با موفقیت تغییر یافت!");
+      resetForm((prevValues) => ({
+        ...prevValues,
+        password: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      }))
+      resetMutationState()
+      return response;
+    } catch (err: any) {
+      toast.error(err?.data?.message || "خطا در تغییر رمز عبور.");
+      throw err;
+    }
   };
   const [editMode, setEditMode] = useState(false);
 
@@ -48,5 +74,6 @@ export default function useProfile() {
     setEditMode,
     changePasswordButtonDisabled,
     editPassword,
+    isLoading,
   };
 }
