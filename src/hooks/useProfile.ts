@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
 import { useEditPasswordRequestMutation } from "../redux/services/AuthAPI";
 import toast from "react-hot-toast";
@@ -8,7 +8,6 @@ import { IEditPasswordBody } from "../types/Auth.types";
 
 export default function useProfile() {
   const { user } = useSelector((state: RootState) => state.auth);
-  const dispatch = useDispatch();
   const methods = useForm({
     defaultValues: {
       ...user,
@@ -25,7 +24,7 @@ export default function useProfile() {
   const newPassword = watch("newPassword");
   const confirmNewPassword = watch("confirmNewPassword");
 
-  const onSubmit = (data: unknown) => {
+  const onSubmit = () => {
     // TODO : implement edit profile in this section
   };
   const editPassword = async (passwordData: IEditPasswordBody) => {
@@ -49,7 +48,7 @@ export default function useProfile() {
       }));
       resetMutationState();
       return response;
-    } catch (err: any) {
+    } catch (err: unknown) {
       toast.error(err?.data?.message || "خطا در تغییر رمز عبور.");
       throw err;
     }

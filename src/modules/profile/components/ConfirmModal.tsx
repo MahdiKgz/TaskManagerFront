@@ -1,7 +1,7 @@
 "use client";
 
 import { close } from "@/src/redux/slices/modalSlice";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";

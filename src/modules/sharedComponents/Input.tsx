@@ -7,7 +7,7 @@ interface InputProps {
   validation?: RegisterOptions;
   disabled?: boolean;
   label?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 function Input({

@@ -22,7 +22,7 @@ const authSlice = createSlice({
       }
     },
     login: (state, action: PayloadAction<{ user: IUser; token: string }>) => {
-      const { confirmPassword, ...userWithoutConfirm } = action.payload.user;
+      const { ...userWithoutConfirm } = action.payload.user;
       state.user = { ...userWithoutConfirm, token: action.payload.token };
     },
     logOut: (state) => {

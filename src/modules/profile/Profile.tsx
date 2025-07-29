@@ -10,7 +10,7 @@ import ChangePassword from "./components/ChangePassword";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/src/redux/store";
 import { open } from "@/src/redux/slices/modalSlice";
-import { IEditPasswordBody, UserWithoutConfirm } from "@/src/types/Auth.types";
+import { IEditPasswordBody } from "@/src/types/Auth.types";
 
 function ProfileModule() {
   const {
@@ -23,20 +23,21 @@ function ProfileModule() {
   } = useProfile();
   const dispatch = useDispatch();
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);
-  const [passwordDataForModal, setPasswordDataForModal] =
-    useState<IEditPasswordBody|undefined>(undefined);
+  const [passwordDataForModal, setPasswordDataForModal] = useState<
+    IEditPasswordBody | undefined
+  >(undefined);
   const handleOpenChangePasswordModal = () => {
-const currentPasswordData: IEditPasswordBody = {
+    const currentPasswordData: IEditPasswordBody = {
       password: methods.getValues("password"),
       newPassword: methods.getValues("newPassword"),
       confirmNewPassword: methods.getValues("confirmNewPassword"),
-    }  
-      if (!changePasswordButtonDisabled) {
+    };
+    if (!changePasswordButtonDisabled) {
       setPasswordDataForModal(currentPasswordData);
       dispatch(open());
     }
   };
-  
+
   return (
     <FormProvider {...methods}>
       <form
