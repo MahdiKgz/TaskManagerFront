@@ -49,6 +49,7 @@ export default function useProfile() {
       resetMutationState();
       return response;
     } catch (err: unknown) {
+      // @ts-expect-error err is unknown type
       toast.error(err?.data?.message || "خطا در تغییر رمز عبور.");
       throw err;
     }
