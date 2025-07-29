@@ -19,14 +19,14 @@ export default function useProfile() {
   });
 
   const { handleSubmit, watch, reset: resetForm } = methods;
-  const [editPasswordMutation, { isLoading,reset: resetMutationState }] =
+  const [editPasswordMutation, { isLoading, reset: resetMutationState }] =
     useEditPasswordRequestMutation();
   const password = watch("password");
   const newPassword = watch("newPassword");
   const confirmNewPassword = watch("confirmNewPassword");
 
   const onSubmit = (data: unknown) => {
-    console.log("data", data);
+    // TODO : implement edit profile in this section
   };
   const editPassword = async (passwordData: IEditPasswordBody) => {
     if (!user?._id) {
@@ -46,8 +46,8 @@ export default function useProfile() {
         password: "",
         newPassword: "",
         confirmNewPassword: "",
-      }))
-      resetMutationState()
+      }));
+      resetMutationState();
       return response;
     } catch (err: any) {
       toast.error(err?.data?.message || "خطا در تغییر رمز عبور.");

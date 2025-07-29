@@ -21,7 +21,7 @@ const ChangePassword: React.FC<IChangePasswordProp> = ({
     await editPassword(passwordDataForModal);
     dispatch(close());
     setTimeout(() => {
-      toast.success("خروج از پنل کاربری");
+      toast.success("رمز عبور با موفقیت تغییر کرد.");
       dispatch(logOut());
       router.replace("/login");
     }, 1000);
@@ -30,22 +30,22 @@ const ChangePassword: React.FC<IChangePasswordProp> = ({
     <FormProvider {...methods}>
       <form
         onSubmit={handleSubmit(onSubmitConfirm)}
-        className="w-full h-auto py-10 flex flex-col gap-5 justify-center items-center"
+        className="w-full flex flex-col gap-5 justify-center items-start text-white"
       >
-        <p className="w-full text-center">
+        <h1 className="w-full font-semibold text-xl text-center">
           آیا از تغییر رمز عبور خود مطمئن هستید؟
-        </p>
-        <span className="w-3/4 h-fit py-2 flex justify-center items-center gap-2">
+        </h1>
+        <span className="w-full h-auto py-2 flex flex-col sm:flex-row items-center justify-center gap-6">
           <button
             onClick={() => dispatch(close())}
             type="button"
-            className="rounded-md cursor-pointer hover:bg-red-500 w-auto h-full py-2 px-4 bg-red-900 text-white  text-center"
+            className="btn btn-error w-full md:w-[160px] font-semibold text-base"
           >
             خیر
           </button>
           <button
             type="submit"
-            className="rounded-md cursor-pointer w-auto text-center text-nowrap hover:bg-green-500  h-full py-2 px-4 bg-green-900 text-white"
+            className="btn btn-soft btn-success w-full md:w-[160px] font-semibold text-base"
           >
             {isLoading ? "در حال ارسال..." : "بله"}
           </button>

@@ -4,21 +4,12 @@ import {
   IRegister,
   UserWithoutConfirm,
 } from "@/src/types/Auth.types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "@/src/redux/services/utils/CustomBaseQuery";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_APP_BASE_URL,
-    prepareHeaders: (headers, { getState }) => {
-      const state = getState() as any;
-      const token = state.auth.user?.token;
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-  }),
+  baseQuery,
   endpoints: (builder) => ({
     registerRequest: builder.mutation<UserWithoutConfirm, IRegister>({
       query: (body) => ({
