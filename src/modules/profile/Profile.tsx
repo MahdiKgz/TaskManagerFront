@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FormProvider } from "react-hook-form";
 import useProfile from "@/src/hooks/useProfile";
 import Input from "../sharedComponents/Input";
@@ -6,22 +6,41 @@ import EditUserIcon from "@/src/icons/EditUserIcon";
 import { VALIDATION_RULES } from "@/src/validations/AuthValidation";
 import EditPasswordIcon from "@/src/icons/EditPasswordIcon";
 import ConfirmModal from "./components/ConfirmModal";
+import ChangePassword from "./components/ChangePassword";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/src/redux/store";
+import { open } from "@/src/redux/slices/modalSlice";
+import { IEditPasswordBody, UserWithoutConfirm } from "@/src/types/Auth.types";
 
 function ProfileModule() {
   const {
     methods,
-    onSumbit,
+    onSubmit,
     handleSubmit,
     editMode,
     setEditMode,
     changePasswordButtonDisabled,
-    openModal,
-    setOpenModal,
   } = useProfile();
+  const dispatch = useDispatch();
+  const isOpen = useSelector((state: RootState) => state.modal.isOpen);
+  const [passwordDataForModal, setPasswordDataForModal] =
+    useState<IEditPasswordBody|undefined>(undefined);
+  const handleOpenChangePasswordModal = () => {
+const currentPasswordData: IEditPasswordBody = {
+      password: methods.getValues("password"),
+      newPassword: methods.getValues("newPassword"),
+      confirmNewPassword: methods.getValues("confirmNewPassword"),
+    }  
+      if (!changePasswordButtonDisabled) {
+      setPasswordDataForModal(currentPasswordData);
+      dispatch(open());
+    }
+  };
+  
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={handleSubmit(onSumbit)}
+        onSubmit={handleSubmit(onSubmit)}
         className="w-full flex flex-col items-start gap-10 sm:gap-8"
       >
         <div className="w-full h-10 flex items-center justify-between">
@@ -35,10 +54,18 @@ function ProfileModule() {
             ویرایش پروفایل
           </button>
         </div>
-        <div className="w-full flex flex-col sm:flex-row items-start gap-8">
-          <Input disabled={!editMode} name="name" label="نام:" />
-          <Input disabled={!editMode} name="username" label="نام کاربری:" />
-          <Input disabled={!editMode} name="email" label="ایمیل:" />
+        <div className="w-full flex flex-col justify-end items-start gap-8">
+          <span className="w-full flex flex-col sm:flex-row items-center justify-between h-full gap-5">
+            <Input disabled={!editMode} name="name" label="نام:" />
+            <Input disabled={!editMode} name="username" label="نام کاربری:" />
+            <Input disabled={!editMode} name="email" label="ایمیل:" />
+          </span>
+          <button
+            className="btn btn-sm sm:btn-md btn-primary flex items-center justify-center gap-2"
+            type="submit"
+          >
+            ثبت نهایی
+          </button>
         </div>
         <div className="w-full flex flex-col items-start gap-10 sm:gap-8">
           <h1 className="w-full font-bold text-xl sm:text-2xl">
@@ -49,6 +76,7 @@ function ProfileModule() {
               validation={VALIDATION_RULES.password}
               name="password"
               label="رمز عبور فعلی:"
+              autoComplete="off"
             />
             <Input
               validation={VALIDATION_RULES.password}
@@ -62,14 +90,19 @@ function ProfileModule() {
             />
             <button
               type="button"
-              onClick={() => setOpenModal(false)}
+              onClick={handleOpenChangePasswordModal}
               className="btn btn-primary btn-md btn-wide my-auto"
               disabled={changePasswordButtonDisabled}
             >
               <EditPasswordIcon />
               تغییر رمز عبور
             </button>
-            {openModal && <ConfirmModal />}
+
+            {isOpen && (
+              <ConfirmModal>
+                <ChangePassword passwordDataForModal={passwordDataForModal} />
+              </ConfirmModal>
+            )}
           </div>
         </div>
       </form>

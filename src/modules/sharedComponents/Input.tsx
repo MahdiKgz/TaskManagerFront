@@ -7,9 +7,16 @@ interface InputProps {
   validation?: RegisterOptions;
   disabled?: boolean;
   label?: string;
+  [key: string]: any;
 }
 
-function Input({ name, validation, disabled = false, label }: InputProps) {
+function Input({
+  name,
+  validation,
+  disabled = false,
+  label,
+  ...rest
+}: InputProps) {
   const {
     register,
     formState: { errors },
@@ -24,6 +31,7 @@ function Input({ name, validation, disabled = false, label }: InputProps) {
       )}
       <input
         className="w-full input focus:input-warning input-lg transition-colors duration-300 !outline-none"
+        {...rest}
         {...register(name, {
           required: "this field is required",
           ...validation,

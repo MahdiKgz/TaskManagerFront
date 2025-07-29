@@ -1,11 +1,15 @@
-import { ILogin, IRegister, UserWithoutConfirm } from "@/src/types/Auth.types";
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import {
+  IEditPasswordBody,
+  ILogin,
+  IRegister,
+  UserWithoutConfirm,
+} from "@/src/types/Auth.types";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { baseQuery } from "@/src/redux/services/utils/CustomBaseQuery";
 
 export const AuthApi = createApi({
   reducerPath: "AuthApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_APP_BASE_URL,
-  }),
+  baseQuery,
   endpoints: (builder) => ({
     registerRequest: builder.mutation<UserWithoutConfirm, IRegister>({
       query: (body) => ({
@@ -21,7 +25,21 @@ export const AuthApi = createApi({
         body,
       }),
     }),
+    editPasswordRequest: builder.mutation<
+      UserWithoutConfirm,
+      { userId: string; passwordData: IEditPasswordBody }
+    >({
+      query: ({ userId, passwordData }) => ({
+        url: `/profile/edit-password/${userId}`,
+        method: "PUT",
+        body: passwordData,
+      }),
+    }),
   }),
 });
 
-export const { useRegisterRequestMutation, useLoginRequestMutation } = AuthApi;
+export const {
+  useRegisterRequestMutation,
+  useLoginRequestMutation,
+  useEditPasswordRequestMutation,
+} = AuthApi;
