@@ -18,7 +18,6 @@ function ProfileModule() {
     onSubmit,
     handleSubmit,
     editMode,
-    setEditMode,
     changePasswordButtonDisabled,
   } = useProfile();
   const dispatch = useDispatch();
@@ -47,9 +46,9 @@ function ProfileModule() {
         <div className="w-full h-10 flex items-center justify-between">
           <h1 className="font-bold text-xl sm:text-2xl">پروفایل کاربری</h1>
           <button
-            onClick={() => setEditMode(!editMode)}
             type="button"
             className="btn btn-sm sm:btn-md btn-primary flex items-center justify-center gap-2"
+            disabled={true}
           >
             <EditUserIcon />
             ویرایش پروفایل
@@ -61,12 +60,6 @@ function ProfileModule() {
             <Input disabled={!editMode} name="username" label="نام کاربری:" />
             <Input disabled={!editMode} name="email" label="ایمیل:" />
           </span>
-          <button
-            className="btn btn-sm sm:btn-md btn-primary flex items-center justify-center gap-2"
-            type="submit"
-          >
-            ثبت نهایی
-          </button>
         </div>
         <div className="w-full flex flex-col items-start gap-10 sm:gap-8">
           <h1 className="w-full font-bold text-xl sm:text-2xl">

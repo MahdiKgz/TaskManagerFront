@@ -1,5 +1,5 @@
 import useOverview from "@/src/hooks/useOverview";
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import Input from "../sharedComponents/Input";
 import RadialProgress from "./components/RadialProgress";
@@ -15,7 +15,7 @@ function DashboardModule() {
 
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (user === null) {
       router.push("/login");
     }

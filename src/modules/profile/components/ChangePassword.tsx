@@ -32,9 +32,12 @@ const ChangePassword: React.FC<IChangePasswordProp> = ({
         onSubmit={handleSubmit(onSubmitConfirm)}
         className="w-full flex flex-col gap-5 justify-center items-start text-white"
       >
-        <h1 className="w-full font-semibold text-xl text-center">
+        <h1 className="w-full font-semibold text-xl md:text-2xl text-center">
           آیا از تغییر رمز عبور خود مطمئن هستید؟
         </h1>
+        <p className="w-full text-xs md:text-sm font-medium text-gray-300 text-center">
+          با انجام این عملیات از حساب کاربری خود خارج خواهید شد!
+        </p>
         <span className="w-full h-auto py-2 flex flex-col sm:flex-row items-center justify-center gap-6">
           <button
             onClick={() => dispatch(close())}
@@ -47,7 +50,7 @@ const ChangePassword: React.FC<IChangePasswordProp> = ({
             type="submit"
             className="btn btn-soft btn-success w-full md:w-[160px] font-semibold text-base"
           >
-            {isLoading ? "در حال ارسال..." : "بله"}
+            {isLoading ? "خروج از حساب ...." : "بله"}
           </button>
         </span>
       </form>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { FormProvider } from "react-hook-form";
 import Input from "../../sharedComponents/Input";
 import Checkbox from "../../sharedComponents/Checkbox";
@@ -24,7 +24,7 @@ function RegisterForm() {
 
   const router = useRouter();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (user !== null) {
       router.push("/dashboard");
     }
