@@ -1,63 +1,11 @@
-// import React, { ReactNode } from "react";
-
+"use client";
 import { ReactNode } from "react";
-import TaskCard from "./TaskCard";
-
-// interface IBrandProps {
-//   children: ReactNode;
-//  item:{
-//     id: string;
-//     status: string;
-//     count: string;
-// }
-// }
-// const getClassNames = (status: string) => {
-//   switch (status) {
-//     case "completed":
-//       return { color: "success", label: "تکمیل شده" };
-//     case "in-progress":
-//       return { color: "warning", label: "در حال تکمیل" };
-//     case "todo":
-//       return { color: "error", label: "برای انجام" };
-//     default:
-//       return { color: "error", label: "نامشخص" };
-//   }
-// };
-// const Board: React.FC<IBrandProps> = ({ children, item }) => {
-//       const { color, label } = getClassNames(item.status);
-
-//   return (
-//     <div className="flex w-full h-[600px] min-h-0 overflow-y-auto flex-col gap-2">
-//       <div
-//         className={` bg-${color} px-4 py-2 flex items-center justify-between h-10 text-center border border-solid rounded-md  w-full`}
-//       >
-//         <p className="font-medium ">{label}</p>
-//         <p className="px-3 py-0.5 bg-white rounded-xl text-center text-black flex items-center justify-center">
-//           {item.count ?? 0}
-//         </p>
-//       </div>
-//       <div className="overflow-y-scroll gap-2 py-2 h-[500px] flex-1 flex-col items-center w-full  px-2 ">
-//         {children}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Board;
-
-type Member = { id: string; name: string };
-type Task = {
-  id: string;
-  title: string;
-  members: Member[];
-};
-type Column = {
-  id: string;
-  title: string;
-  colorClass: string;
-  count: number;
-  tasks: Task[];
-};
+import { useDroppable } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { TTaskData } from "@/src/types/Tasks.types";
 
 interface IBrandProps {
   children: ReactNode;
@@ -65,6 +13,7 @@ interface IBrandProps {
     id: string;
     status: string;
     count: string;
+    tasks?: TTaskData[];
   };
 }
 const Board: React.FC<IBrandProps> = ({ item, children }) => {
@@ -81,6 +30,11 @@ const Board: React.FC<IBrandProps> = ({ item, children }) => {
     }
   };
   const { color, label } = getClassNames(item.status);
+  const { setNodeRef, isOver } = useDroppable({
+    id: item.status,
+  });
+  const taskIds = item.tasks?.map((task) => `${item.id}::${task.id}`) || [];
+  const isEmpty = !item.tasks || item.tasks.length === 0;
 
   return (
     <div className="mb-2 h-full flex flex-col gap-2 items-center justify-start w-full">
@@ -92,9 +46,27 @@ const Board: React.FC<IBrandProps> = ({ item, children }) => {
           {item.count}
         </span>
       </div>
-
-      <div className="rounded-xl p-3 border-slate-700 h-full w-full bg-base-200">
-        <div className="flex flex-col gap-3 pb-3 mb-3 h-fit">{children}</div>
+      <div
+        ref={setNodeRef}
+        className={`rounded-xl p-3 border h-full w-full min-h-[400px] transition-all duration-200 ${
+          isOver
+            ? " border-indigo-500 border-2 bg-base-200"
+            : "border-slate-700 bg-base-200"
+        }`}
+      >
+        <SortableContext items={taskIds} strategy={verticalListSortingStrategy}>
+          <div className="flex flex-col gap-3 min-h-[350px] h-full">
+            {children}
+            {isEmpty && (
+              <div className="flex items-center justify-center h-full min-h-[300px] text-slate-400  rounded-lg">
+                <div className="text-center p-8">
+                  <div className="text-4xl mb-2">📋</div>
+                  <p className="text-sm font-medium">ستون خالی است</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </SortableContext>
       </div>
     </div>
   );
