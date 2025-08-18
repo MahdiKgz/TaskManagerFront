@@ -43,6 +43,14 @@ export const TaskAPI = createApi({
       }),
       providesTags: (result, error, { id }) => [{ type: "Tasks", id }],
     }),
+     updateTask: builder.mutation<TTaskResponse, { id: string; status: string }>({
+      query: ({ id, ...body }) => ({
+        url: `/tasks/${id}`,
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: ["Tasks"],
+    }),
   }),
 });
 
@@ -51,4 +59,5 @@ export const {
   useDeleteTaskMutation,
   useGetAllTasksQuery,
   useAddTaskMutation,
+  useUpdateTaskMutation
 } = TaskAPI;

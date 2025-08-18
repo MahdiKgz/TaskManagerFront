@@ -1,10 +1,11 @@
-import { TTaskData } from "@/src/types/Tasks.types";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
+import type React from "react"
+import type { TTaskData } from "@/src/types/Tasks.types"
+import { useSortable } from "@dnd-kit/sortable"
+import { CSS } from "@dnd-kit/utilities"
 
 interface ITaskCardProps {
-  task: TTaskData;
-  isDragging?: boolean;
+  task: TTaskData
+  isDragging?: boolean
 }
 const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false }) => {
   const {
@@ -16,13 +17,13 @@ const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false }) => {
     isDragging: isSortableDragging,
   } = useSortable({
     id: `${task.status}::${task._id}`,
-  });
+  })
 
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isSortableDragging ? 0.5 : 1,
-  };
+  }
 
   return (
     <div

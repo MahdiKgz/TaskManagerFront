@@ -6,11 +6,11 @@ export type TTaskData = {
   description: string;
   user: string;
 };
-export type TTaskState={
-  tasks:TTaskData[],
-  loading:boolean,
-  error:string | null
-}
+export type TTaskState = {
+  tasks: TTaskData[];
+  loading: boolean;
+  error: string | null;
+};
 export type BoardData = {
   id: string;
   status: string;
@@ -18,16 +18,14 @@ export type BoardData = {
   tasks: TTaskData[];
 };
 export type TTaskApi = {
-  // id: string;
-  // status: "todo" | "in-progress" | "completed";
   status: string;
   title: string;
   description: string;
   user: string;
-}
+};
 export type TDeleteTaskParam = { id: string };
 
-export type TTaskDeleteResponse = {message:string}
+export type TTaskDeleteResponse = { message: string };
 export type TTaskResponse = {
   title: string;
   description: string;

@@ -1,40 +1,39 @@
-"use client";
-import { ReactNode } from "react";
-import { useDroppable } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
-import { TTaskData } from "@/src/types/Tasks.types";
+"use client"
+import type { ReactNode } from "react"
+import type React from "react"
+
+import { useDroppable } from "@dnd-kit/core"
+import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable"
+import type { TTaskData } from "@/src/types/Tasks.types"
 
 interface IBrandProps {
-  children: ReactNode;
+  children: ReactNode
   item: {
-    id: string;
-    status: string;
-    count: string;
-    tasks?: TTaskData[];
-  };
+    id: string
+    status: string
+    count: string
+    tasks?: TTaskData[]
+  }
 }
 const Board: React.FC<IBrandProps> = ({ item, children }) => {
   const getClassNames = (status: string) => {
     switch (status) {
       case "completed":
-        return { color: "success", label: "تکمیل شده" };
+        return { color: "success", label: "تکمیل شده" }
       case "in-progress":
-        return { color: "warning", label: "در حال تکمیل" };
+        return { color: "warning", label: "در حال تکمیل" }
       case "todo":
-        return { color: "error", label: "برای انجام" };
+        return { color: "error", label: "برای انجام" }
       default:
-        return { color: "error", label: "نامشخص" };
+        return { color: "error", label: "نامشخص" }
     }
-  };
-  const { color, label } = getClassNames(item.status);
+  }
+  const { color, label } = getClassNames(item.status)
   const { setNodeRef, isOver } = useDroppable({
     id: item.status,
-  });
-  const taskIds = item.tasks?.map((task) => `${item.id}::${task._id}`) || [];
-  const isEmpty = !item.tasks || item.tasks.length === 0;
+  })
+  const taskIds = item.tasks?.map((task) => `${task.status}::${task._id}`) || []
+  const isEmpty = !item.tasks || item.tasks.length === 0
 
   return (
     <div className="mb-2 h-full flex flex-col gap-2 items-center justify-start w-full">

@@ -8,23 +8,18 @@ import { arrayMove } from "@dnd-kit/sortable"
 import type { TTaskData } from "@/src/types/Tasks.types"
 import useTask from "@/src/hooks/useTask"
 
-
-
 const TaksModule = () => {
-  const { allTasks, isLoadingTasks } = useTask()
+  const { allTasks, isLoadingTasks, updateTask } = useTask()
 
-
-  const [tasks, setTasks] = useState<TTaskData[]>([]) 
+  const [tasks, setTasks] = useState<TTaskData[]>([])
   const [activeTask, setActiveTask] = useState<TTaskData | null>(null)
   const sensors = useSensors(useSensor(PointerSensor))
 
   useEffect(() => {
     if (allTasks && allTasks.length > 0) {
-      console.log("[v0] Using API data:", allTasks)
       setTasks(allTasks)
     } else if (!isLoadingTasks && (!allTasks || allTasks.length === 0)) {
-      console.log("[v0] Using fallback data")
-      setTasks(initialTaskData)
+      setTasks([])
     }
   }, [allTasks, isLoadingTasks])
 
@@ -35,8 +30,6 @@ const TaksModule = () => {
       </div>
     )
   }
-
-
 
   const todoTasks = tasks.filter((task) => task.status === "todo")
   const inProgressTasks = tasks.filter((task) => task.status === "in-progress")
@@ -85,6 +78,14 @@ const TaksModule = () => {
       const toStatus = overId
 
       if (fromStatus !== toStatus) {
+        const updatedTask = tasks.find((t) => t._id === taskId)
+        if (updatedTask) {
+          updateTask({
+            id: taskId,
+            status: toStatus as "todo" | "in-progress" | "completed",
+          })
+        }
+
         // انتقال به ستون جدید
         setTasks((prevTasks) => {
           return prevTasks.map((task) =>
@@ -135,7 +136,6 @@ const TaksModule = () => {
       return newTasks
     })
   }
- 
 
   return (
     <div className="flex gap-2 w-full items-start justify-start">
