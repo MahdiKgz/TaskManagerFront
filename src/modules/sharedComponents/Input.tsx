@@ -33,7 +33,7 @@ function Input({
         className="w-full input focus:input-warning input-lg transition-colors duration-300 !outline-none"
         {...rest}
         {...register(name, {
-          required: "this field is required",
+          required: "پرکردن این فیلد الزامی است",
           ...validation,
         })} // Spread the validation prop
         placeholder={PLACEHOLDER[name]}

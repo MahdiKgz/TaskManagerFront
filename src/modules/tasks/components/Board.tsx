@@ -33,7 +33,7 @@ const Board: React.FC<IBrandProps> = ({ item, children }) => {
   const { setNodeRef, isOver } = useDroppable({
     id: item.status,
   });
-  const taskIds = item.tasks?.map((task) => `${item.id}::${task.id}`) || [];
+  const taskIds = item.tasks?.map((task) => `${item.id}::${task._id}`) || [];
   const isEmpty = !item.tasks || item.tasks.length === 0;
 
   return (

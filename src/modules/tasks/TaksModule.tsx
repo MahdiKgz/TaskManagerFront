@@ -16,54 +16,35 @@ import { TTaskData } from "@/src/types/Tasks.types";
 
 const initialTaskData: TTaskData[] = [
   {
-    id: "task-1",
+    _id: "task-1",
     status: "todo",
-    badge: "طراحی UI",
     title: "رابط کاربری داشبورد",
     description: "شروع یک کسب‌وکار جدید مثل بندبازی روی تک‌چرخه است!",
-    members: [
-      { id: "1", name: "مهسا" },
-      { id: "2", name: "رویا" },
-      { id: "3", name: "سیما" },
-      { id: "4", name: "حسن" },
-    ],
+    user: "1",
   },
   {
-    id: "task-2",
+    _id: "task-2",
     status: "todo",
+    user: "1",
 
-    badge: "توسعه",
     title: "API پرداخت",
     description: "پیاده‌سازی سیستم پرداخت آنلاین",
-    members: [
-      { id: "1", name: "مهسا" },
-      { id: "3", name: "سیما" },
-    ],
   },
   {
-    id: "task-3",
+    _id: "task-3",
     status: "todo",
+    user: "1",
 
-    badge: "تست",
     title: "تست واحد",
     description: "نوشتن تست‌های واحد برای کامپوننت‌ها",
-    members: [
-      { id: "2", name: "رویا" },
-      { id: "4", name: "حسن" },
-    ],
   },
   {
-    id: "task-4",
+    _id: "task-4",
     status: "completed",
+    user: "1",
 
-    badge: "طراحی UI",
     title: "صفحه ورود",
     description: "طراحی و پیاده‌سازی صفحه ورود کاربران",
-    members: [
-      { id: "1", name: "مهسا" },
-      { id: "2", name: "رویا" },
-      { id: "3", name: "سیما" },
-    ],
   },
 ];
 
@@ -101,7 +82,7 @@ const TaksModule = () => {
   const handleDragStart = (event: any) => {
     const { active } = event;
     const [status, taskId] = active.id.split("::");
-    const task = tasks.find((t) => t.id === taskId);
+    const task = tasks.find((t) => t._id === taskId);
     setActiveTask(task || null);
   };
 
@@ -127,7 +108,7 @@ const TaksModule = () => {
         // انتقال به ستون جدید
         setTasks((prevTasks) => {
           return prevTasks.map((task) =>
-            task.id === taskId
+            task._id === taskId
               ? {
                   ...task,
                   status: toStatus as "todo" | "in-progress" | "completed",
@@ -147,7 +128,7 @@ const TaksModule = () => {
 
     setTasks((prevTasks) => {
       const newTasks = [...prevTasks];
-      const taskIndex = newTasks.findIndex((t) => t.id === taskId);
+      const taskIndex = newTasks.findIndex((t) => t._id === taskId);
 
       if (taskIndex === -1) return prevTasks;
 
@@ -158,10 +139,10 @@ const TaksModule = () => {
         );
         const overTaskId = overId.split("::")[1];
         const currentIndex = sameCategoryTasks.findIndex(
-          (t) => t.id === taskId
+          (t) => t._id === taskId
         );
         const overIndex = sameCategoryTasks.findIndex(
-          (t) => t.id === overTaskId
+          (t) => t._id === overTaskId
         );
 
         if (currentIndex !== -1 && overIndex !== -1) {
@@ -195,7 +176,7 @@ const TaksModule = () => {
           id="ُshowtask"
           className="bg-gray-100 p-2 rounded-md"
         >
-          <option value="todo" className="cursor-pointer" selected>
+          <option value="todo" className="cursor-pointer">
             برای انجام
           </option>
           <option value="in-progress" className="cursor-pointer">
@@ -219,7 +200,7 @@ const TaksModule = () => {
             >
               <Board item={item}>
                 {item.tasks.map((task) => (
-                  <TaskCard key={task.id} task={task} />
+                  <TaskCard key={task._id} task={task} />
                 ))}
               </Board>
             </span>

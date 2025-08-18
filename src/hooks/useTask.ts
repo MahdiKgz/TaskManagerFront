@@ -1,44 +1,84 @@
-import { SubmitHandler, useForm } from "react-hook-form";
-// import { useRouter } from "next/navigation";
-// import { useDispatch } from "react-redux";
-// import { setUser } from "../redux/slices/authSlice";
-// import toast from "react-hot-toast";
+"use client"
+
+import { RootState } from './../redux/store';
+import { type SubmitHandler, useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
+import { useAddTaskMutation, useGetAllTasksQuery } from "../redux/services/TaskAPI"
+import { useDispatch, useSelector } from "react-redux";
+
+interface TaskFormData {
+  status: string,
+  title: string,
+  description: string,
+  user: string,
+}
 
 export default function useTask() {
-  // const router = useRouter();
-  // const dispatch = useDispatch();
-  // const [checked, setChecked] = useState<boolean>(false);
+  const router = useRouter()
+  const [addTask, { isLoading: isAddingTask }] = useAddTaskMutation()
+  const { data: allTasks, isLoading: isLoadingTasks, refetch } = useGetAllTasksQuery()
+  // const { data: oneTask, isLoading: isLoadingOneTask } = useGetOneTaskQuery("") // Initialize with an empty string or a placeholder
 
-  const methods = useForm({
+  const methods = useForm<TaskFormData>({
     defaultValues: {
-      username: "",
-      password: "",
+      status: "",
+      title: "",
+      description: "",
+      user: "",
     },
-  });
+  })
 
   const {
     handleSubmit,
-    formState: { isValid },
-  } = methods;
+    register,
+    formState: { errors },
+  } = methods
+const {user}=useSelector((state:RootState)=>state.auth)
+  const onSubmit: SubmitHandler<TaskFormData> = async (data) => {
+    const finalData={
+      status: data.status||"todo",
+      title: data.title,
+      description: data.description,
+      user: String(user?._id) ||"",
+    }
+    try {
+      const response = await addTask(finalData).unwrap()
+      toast.success("تسک با موفقیت اضافه شد")
+      methods.reset()
+      // refetch()
+    } catch (err: any) {
+      toast.error(err?.data?.message || "خطا در عملیات")
+    }
+  }
 
- 
+  const getAllTask =async () => {
+    try{
+      const res= await 
 
-  const onSubmit = async (data:any) => {
-    console.log(data);
-    // try {
-    //   const response = await loginRequest(data).unwrap();
-    //   dispatch(setUser(response));
-    //   toast.success("با موفقیت وارد شدید.");
-    //   router.push("/dashboard");
-    // } catch (err) {
-    //   // @ts-expect-error err is unknown
-    //   toast.error(err.data.message);
-    // }
-  };
+    }catch (err: any) {
+      toast.error(err?.data?.message || "خطا در عملیات")
+    }
+    // This function can be used to trigger a refetch with a specific task ID
+    // For example: getOneTask("taskId")
+  }
+  const getOneTask = (id: string) => {
+    // This function can be used to trigger a refetch with a specific task ID
+    // For example: getOneTask("taskId")
+  }
 
   return {
     methods,
     handleSubmit,
     onSubmit,
-  };
+    register,
+    formState: { errors },
+    // allTasks,
+    // isLoadingTasks,
+    isAddingTask,
+    // refetchTasks: refetch,
+    // oneTask,
+    // isLoadingOneTask,
+    getOneTask,
+  }
 }

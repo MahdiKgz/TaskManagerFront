@@ -5,7 +5,13 @@ import useTask from "@/src/hooks/useTask";
 import TaskIcon from "@/src/icons/TaskIcon";
 
 const AddTask = () => {
-  const { methods, onSubmit, handleSubmit } = useTask();
+  const {
+    methods,
+    onSubmit,
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useTask();
   return (
     <FormProvider {...methods}>
       <form
@@ -30,7 +36,7 @@ const AddTask = () => {
                     id="todo"
                     type="radio"
                     value="todo"
-                    name="status"
+                    {...register("status")}
                     className="w-4 h-4 text-slate-400 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                   ></input>
                   <label
@@ -45,7 +51,7 @@ const AddTask = () => {
                     id="in-progress"
                     type="radio"
                     value="in-progress"
-                    name="status"
+                    {...register("status")}
                     className="w-4 h-4 text-slate-400 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2"
                   ></input>
                   <label
@@ -60,7 +66,7 @@ const AddTask = () => {
                     id="completed"
                     type="radio"
                     value="completed"
-                    name="status"
+                    {...register("status")}
                     className="w-4 h-4 text-slate-400 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2 cursor-pointer"
                   ></input>
                   <label
@@ -75,10 +81,27 @@ const AddTask = () => {
             <div className="w-full flex flex-col gap-2">
               <label htmlFor="desc">توضیحات</label>
               <textarea
+                {...register("description", {
+                  required: "توضیحات الزامیست",
+
+                  minLength: {
+                    value: 10,
+                    message: "توضیحات باید حداقل دارای 10 کارکتر باشد",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: "توضیحات میتواند حداکثر 100 کارکتر داشته باشد",
+                  },
+                })}
                 id="desc"
                 className="min-h-24 p-2 input "
                 placeholder="توضیحات کوتاه اضافه کنید..."
               />
+              {errors.description && (
+                <p className="text-red-600">
+                  {errors.description.message as string}
+                </p>
+              )}
             </div>
             <button
               type="submit"
