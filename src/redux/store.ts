@@ -15,6 +15,7 @@ import { AuthApi } from "./services/AuthAPI";
 import authReducer from "./slices/authSlice";
 import modalReducer from "./slices/modalSlice";
 import { overViewAPI } from "./services/OverViewAPI";
+import { TaskAPI } from "./services/TaskAPI";
 
 const persistConfig = {
   key: "auth",
@@ -27,6 +28,8 @@ const persistConfig = {
 const rootReducer = combineReducers({
   [AuthApi.reducerPath]: AuthApi.reducer,
   [overViewAPI.reducerPath]: overViewAPI.reducer,
+      [TaskAPI.reducerPath]: TaskAPI.reducer,
+
   auth: authReducer,
   modal: modalReducer,
 });
@@ -42,7 +45,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(AuthApi.middleware, overViewAPI.middleware),
+    }).concat(AuthApi.middleware, overViewAPI.middleware,TaskAPI.middleware),
   devTools: process.env.NODE_ENV !== "production",
 });
 
