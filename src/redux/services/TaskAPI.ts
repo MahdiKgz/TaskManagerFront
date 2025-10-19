@@ -22,13 +22,15 @@ export const TaskAPI = createApi({
       }),
       invalidatesTags: ["Tasks"],
     }),
-    getAllTasks: builder.query<TTaskData[], void>({
-      query: () => ({
-        url: "/tasks",
+
+    getAllTasks: builder.query<TTaskData[], string>({
+      query: (userId) => ({
+        url: `/tasks/${userId}`,
         method: "GET",
       }),
       providesTags: ["Tasks"],
     }),
+
     deleteTask: builder.mutation<TTaskDeleteResponse, TDeleteTaskParam>({
       query: ({ id }) => ({
         url: `/tasks/${id}`,
@@ -36,6 +38,7 @@ export const TaskAPI = createApi({
       }),
       invalidatesTags: ["Tasks"],
     }),
+
     getOneTask: builder.query<TTaskData, { id: string }>({
       query: ({ id }) => ({
         url: `/tasks/${id}`,
@@ -43,7 +46,8 @@ export const TaskAPI = createApi({
       }),
       providesTags: (result, error, { id }) => [{ type: "Tasks", id }],
     }),
-     updateTask: builder.mutation<TTaskResponse, { id: string; status: string }>({
+
+    updateTask: builder.mutation<TTaskResponse, { id: string; status: string }>({
       query: ({ id, ...body }) => ({
         url: `/tasks/${id}`,
         method: "PATCH",
@@ -59,5 +63,5 @@ export const {
   useDeleteTaskMutation,
   useGetAllTasksQuery,
   useAddTaskMutation,
-  useUpdateTaskMutation
+  useUpdateTaskMutation,
 } = TaskAPI;
