@@ -15,6 +15,7 @@ import { arrayMove } from "@dnd-kit/sortable";
 import type { TTaskData } from "@/src/types/Tasks.types";
 import useTask from "@/src/hooks/useTask";
 import AddTaskModal from "./components/AddTaskModal";
+import toast from "react-hot-toast";
 
 const TaksModule = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -97,6 +98,7 @@ const TaksModule = () => {
             id: taskId,
             status: toStatus as "todo" | "in-progress" | "completed",
           });
+          toast.success("وضعیت تسک تغییر کرد.");
         }
 
         // انتقال به ستون جدید
@@ -155,7 +157,6 @@ const TaksModule = () => {
           status: toStatus as "todo" | "in-progress" | "completed",
         };
       }
-
       return newTasks;
     });
   };
