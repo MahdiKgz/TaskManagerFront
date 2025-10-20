@@ -2,7 +2,6 @@
 
 import type { RootState } from "../redux/store";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import {
   useAddTaskMutation,
@@ -21,9 +20,9 @@ interface TaskFormData {
 }
 
 export default function useTask() {
-  const router = useRouter();
   const { user } = useSelector((state: RootState) => state.auth);
   const userId = user?._id;
+
 
   const {
     data: allTasks,
@@ -60,11 +59,11 @@ export default function useTask() {
 
     try {
       await addTask(finalData).unwrap();
-      toast.success("Task added successfully");
+      toast.success("تسک با موفقیت ایجاد شد.");
       methods.reset();
       refetch();
     } catch (err: any) {
-      toast.error(err?.data?.message || "Error adding task");
+      toast.error(err?.data?.message || "مشکلی در ایجاد تسک به وجود آمد.");
     }
   };
 
@@ -77,6 +76,7 @@ export default function useTask() {
       toast.error(err?.data?.message || "Error deleting task");
     }
   };
+
 
   return {
     methods,
