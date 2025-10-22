@@ -1,24 +1,26 @@
 "use client";
 import { FormProvider } from "react-hook-form";
 import Input from "../../sharedComponents/Input";
-import useTask from "@/src/hooks/useTask";
 import TaskIcon from "@/src/icons/TaskIcon";
 import RadioButton from "./RadioButton";
 import TextArea from "./TextArea";
 import CloseIcon from "@/src/icons/CloseIcon";
+import { TTaskData } from "@/src/types/Tasks.types";
+import useEditTasks from "@/src/hooks/useEditTasks";
+import TrashIcon from "@/src/icons/TrashIcon";
+import DeleteTaskButton from "./DeleteTaskButton";
 
-interface AddTaskProps {
+interface EditTaskProps {
+  task: TTaskData;
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }
 
-const AddTask = ({ isOpen, setIsOpen }: AddTaskProps) => {
-  const {
-    methods,
-    onSubmit,
-    handleSubmit,
-    formState: { errors },
-  } = useTask();
+const EditTask = ({ task, isOpen, setIsOpen }: EditTaskProps) => {
+  const { methods, handleSubmit, onSubmit, isDirty, errors } =
+    useEditTasks(task);
+
+  console.log({ isOpen, setIsOpen });
   return (
     <FormProvider {...methods}>
       <form
@@ -28,10 +30,10 @@ const AddTask = ({ isOpen, setIsOpen }: AddTaskProps) => {
         <div className="w-full sm:w-[60%] md:w-[40%] md:mx-auto mb-3 text-sm font-semibold text-slate-100 border-slate-700 border bg-base-200 p-6 h-fit rounded-xl">
           <div className="flex items-center justify-between mb-5">
             <h1 className="text-xl text-right font-semibold text-slate-100">
-              ایجاد تسک جدید
+              {task.title}
             </h1>
             <button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={() => setIsOpen(false)}
               type="button"
               className="cursor-pointer"
             >
@@ -55,7 +57,7 @@ const AddTask = ({ isOpen, setIsOpen }: AddTaskProps) => {
               <label htmlFor="desc">توضیحات</label>
               <TextArea />
               {errors.description && (
-                <p className="text-red-600">
+                <p className="text-red-600 text-sm">
                   {errors.description.message as string}
                 </p>
               )}
@@ -63,10 +65,12 @@ const AddTask = ({ isOpen, setIsOpen }: AddTaskProps) => {
             <button
               type="submit"
               className="w-full btn btn-sm sm:btn-md btn-primary flex items-center justify-center gap-2"
+              disabled={!isDirty}
             >
               <TaskIcon />
               ایجاد تسک جدید{" "}
-            </button>{" "}
+            </button>
+            <DeleteTaskButton taskID={task._id} />
           </div>
         </div>
       </form>
@@ -74,4 +78,4 @@ const AddTask = ({ isOpen, setIsOpen }: AddTaskProps) => {
   );
 };
 
-export default AddTask;
+export default EditTask;

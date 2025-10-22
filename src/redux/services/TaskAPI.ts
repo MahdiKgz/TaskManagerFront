@@ -47,7 +47,7 @@ export const TaskAPI = createApi({
       providesTags: (result, error, { id }) => [{ type: "Tasks", id }],
     }),
 
-    updateTask: builder.mutation<TTaskResponse, { id: string; status: string }>({
+    updateTask: builder.mutation<TTaskResponse, Partial<TTaskData> & { id: string } | { id: string; status: string }>({
       query: ({ id, ...body }) => ({
         url: `/tasks/${id}`,
         method: "PATCH",
