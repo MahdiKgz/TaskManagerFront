@@ -6,4 +6,5 @@ export const PLACEHOLDER: Record<string, string> = {
   email: "ایمیل",
   newPassword: "رمز عبور جدید",
   confirmNewPassword: "تکرار رمز عبور جدید",
+  title: "عنوان تسک"
 };
