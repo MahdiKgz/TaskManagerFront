@@ -1,7 +1,7 @@
-import React from "react";
+import TaksModule from "@/src/modules/tasks/TaksModule";
 
 function Tasks() {
-  return <div>Tasks</div>;
+  return <TaksModule/>;
 }
 
 export default Tasks;
