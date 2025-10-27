@@ -31,16 +31,33 @@ const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false, onEditCl
       ref={setNodeRef}
       style={style}
       {...attributes}
-      // {...listeners}
-      onClick={onEditClick}
-      className={`rounded-lg border h-fit p-4 shadow-sm hover:shadow border-slate-700 bg-transparent hover:bg-base-100 transition-all duration-700 cursor-pointer ${
+      className={`relative rounded-lg border h-fit p-4 shadow-sm hover:shadow border-slate-700 bg-transparent hover:bg-base-100 transition-all duration-700 ${
         isDragging ? "ring-2 ring-indigo-500 shadow-lg" : ""
       }`}
     >
-      <div className="font-medium text-slate-100">{task.title}</div>
-      <p className="mt-1 line-clamp-2 text-sm text-slate-400">
-        {task.description}
-      </p>
+      {/* Drag Handle */}
+      <div
+        {...listeners}
+        className="absolute top-2 right-2 w-6 h-6 cursor-grab active:cursor-grabbing flex items-center justify-center text-slate-400 hover:text-slate-200 transition-colors"
+        title="Drag to reorder"
+      >
+        <svg
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+        >
+          <path d="M8 6h8v2H8V6zm0 4h8v2H8v-2zm0 4h8v2H8v-2z" />
+        </svg>
+      </div>
+      
+      {/* Clickable Content */}
+      <div onClick={onEditClick} className="cursor-pointer pr-8">
+        <div className="font-medium text-slate-100">{task.title}</div>
+        <p className="mt-1 line-clamp-2 text-sm text-slate-400">
+          {task.description}
+        </p>
+      </div>
     </div>
   );
 };
