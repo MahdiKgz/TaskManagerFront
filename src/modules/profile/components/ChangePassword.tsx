@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 interface IChangePasswordProp {
-  passwordDataForModal: IEditPasswordBody;
+  passwordDataForModal: IEditPasswordBody | undefined;
 }
 const ChangePassword: React.FC<IChangePasswordProp> = ({
   passwordDataForModal,
@@ -18,6 +18,10 @@ const ChangePassword: React.FC<IChangePasswordProp> = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const onSubmitConfirm = async () => {
+    if (!passwordDataForModal) {
+      toast.error("داده‌های رمز عبور یافت نشد.");
+      return;
+    }
     await editPassword(passwordDataForModal);
     dispatch(close());
     setTimeout(() => {

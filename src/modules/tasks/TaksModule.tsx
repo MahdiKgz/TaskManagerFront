@@ -6,6 +6,7 @@ import Board from "./components/Board";
 import {
   DndContext,
   type DragEndEvent,
+  type DragStartEvent,
   DragOverlay,
   PointerSensor,
   useSensor,
@@ -69,9 +70,9 @@ const TaksModule = () => {
     },
   ];
 
-  const handleDragStart = (event: { active: { id: string } }) => {
+  const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
-    const [, taskId] = active.id.split("::");
+    const [, taskId] = active.id.toString().split("::");
     const task = tasks.find((t) => t._id === taskId);
     setActiveTask(task || null);
   };
