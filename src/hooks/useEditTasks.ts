@@ -17,7 +17,7 @@ export default function useEditTasks(task: TTaskData) {
         try {
             await updateTask({ id: data._id, ...data }).unwrap();
             toast.success("تسک با موفقیت ویرایش شد.")
-        } catch (err: unknown) {
+        } catch {
             toast.error("در ویرایش مشکلی  پیش آمد.")
         }
     }

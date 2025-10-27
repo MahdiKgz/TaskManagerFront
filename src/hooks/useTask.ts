@@ -62,8 +62,9 @@ export default function useTask() {
       toast.success("تسک با موفقیت ایجاد شد.");
       methods.reset();
       refetch();
-    } catch (err: any) {
-      toast.error(err?.data?.message || "مشکلی در ایجاد تسک به وجود آمد.");
+    } catch (err: unknown) {
+      const error = err as { data?: { message?: string } };
+      toast.error(error?.data?.message || "مشکلی در ایجاد تسک به وجود آمد.");
     }
   };
 
@@ -72,8 +73,9 @@ export default function useTask() {
       await deleteTask({ id }).unwrap();
       toast.success("Task deleted successfully");
       refetch();
-    } catch (err: any) {
-      toast.error(err?.data?.message || "Error deleting task");
+    } catch (err: unknown) {
+      const error = err as { data?: { message?: string } };
+      toast.error(error?.data?.message || "Error deleting task");
     }
   };
 

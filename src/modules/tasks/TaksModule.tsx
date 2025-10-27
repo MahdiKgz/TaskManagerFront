@@ -69,9 +69,9 @@ const TaksModule = () => {
     },
   ];
 
-  const handleDragStart = (event: any) => {
+  const handleDragStart = (event: { active: { id: string } }) => {
     const { active } = event;
-    const [_, taskId] = active.id.split("::");
+    const [, taskId] = active.id.split("::");
     const task = tasks.find((t) => t._id === taskId);
     setActiveTask(task || null);
   };

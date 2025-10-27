@@ -7,7 +7,6 @@ import TextArea from "./TextArea";
 import CloseIcon from "@/src/icons/CloseIcon";
 import { TTaskData } from "@/src/types/Tasks.types";
 import useEditTasks from "@/src/hooks/useEditTasks";
-import TrashIcon from "@/src/icons/TrashIcon";
 import DeleteTaskButton from "./DeleteTaskButton";
 
 interface EditTaskProps {

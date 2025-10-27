@@ -14,7 +14,7 @@ function DeleteTaskButton({ taskID }: DeleteTaskButtonProps) {
     try {
       await deleteTask({ id: taskID });
       toast.success("تسک با موفقیت حذف شد.");
-    } catch (err) {
+    } catch {
       toast.error("مشکلی برای حذف وجود دارد");
     }
   };
