@@ -15,7 +15,7 @@ export default function useEditTasks(task: TTaskData) {
 
     const onSubmit = async (data: TTaskData) => {
         try {
-            updateTask({ id: data._id, ...data });
+            await updateTask({ id: data._id, ...data }).unwrap();
             toast.success("تسک با موفقیت ویرایش شد.")
         } catch (err: unknown) {
             toast.error("در ویرایش مشکلی  پیش آمد.")

@@ -2,15 +2,13 @@ import type React from "react";
 import type { TTaskData } from "@/src/types/Tasks.types";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useState } from "react";
-import EditTaskModal from "./EditTaskModal";
 
 interface ITaskCardProps {
   task: TTaskData;
   isDragging?: boolean;
+  onEditClick: () => void;
 }
-const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false }) => {
-  const [openEditModal, setOpenEditModal] = useState<boolean>(false);
+const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false, onEditClick }) => {
   const {
     attributes,
     listeners,
@@ -34,7 +32,7 @@ const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false }) => {
       style={style}
       {...attributes}
       // {...listeners}
-      onClick={() => setOpenEditModal(true)}
+      onClick={onEditClick}
       className={`rounded-lg border h-fit p-4 shadow-sm hover:shadow border-slate-700 bg-transparent hover:bg-base-100 transition-all duration-700 cursor-pointer ${
         isDragging ? "ring-2 ring-indigo-500 shadow-lg" : ""
       }`}
@@ -43,13 +41,6 @@ const TaskCard: React.FC<ITaskCardProps> = ({ task, isDragging = false }) => {
       <p className="mt-1 line-clamp-2 text-sm text-slate-400">
         {task.description}
       </p>
-      {openEditModal && (
-        <EditTaskModal
-          isOpen={openEditModal}
-          setIsOpen={setOpenEditModal}
-          task={task}
-        />
-      )}
     </div>
   );
 };

@@ -20,7 +20,7 @@ const EditTask = ({ task, isOpen, setIsOpen }: EditTaskProps) => {
   const { methods, handleSubmit, onSubmit, isDirty, errors } =
     useEditTasks(task);
 
-  console.log({ isOpen, setIsOpen });
+
   return (
     <FormProvider {...methods}>
       <form
@@ -33,7 +33,7 @@ const EditTask = ({ task, isOpen, setIsOpen }: EditTaskProps) => {
               {task.title}
             </h1>
             <button
-              onClick={() => setIsOpen(false)}
+              onClick={() => setIsOpen(!isOpen)}
               type="button"
               className="cursor-pointer"
             >
@@ -68,7 +68,7 @@ const EditTask = ({ task, isOpen, setIsOpen }: EditTaskProps) => {
               disabled={!isDirty}
             >
               <TaskIcon />
-              ایجاد تسک جدید{" "}
+              ویرایش تسک{" "}
             </button>
             <DeleteTaskButton taskID={task._id} />
           </div>

@@ -15,10 +15,13 @@ import { arrayMove } from "@dnd-kit/sortable";
 import type { TTaskData } from "@/src/types/Tasks.types";
 import useTask from "@/src/hooks/useTask";
 import AddTaskModal from "./components/AddTaskModal";
+import EditTaskModal from "./components/EditTaskModal";
 import toast from "react-hot-toast";
 
 const TaksModule = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [editModalOpen, setEditModalOpen] = useState<boolean>(false);
+  const [selectedTask, setSelectedTask] = useState<TTaskData | null>(null);
   const { allTasks, isLoadingTasks, updateTask } = useTask();
 
   const [tasks, setTasks] = useState<TTaskData[]>([]);
@@ -206,7 +209,14 @@ const TaksModule = () => {
               >
                 <Board item={item}>
                   {item.tasks.map((task) => (
-                    <TaskCard key={task._id} task={task} />
+                    <TaskCard 
+                      key={task._id} 
+                      task={task} 
+                      onEditClick={() => {
+                        setSelectedTask(task);
+                        setEditModalOpen(true);
+                      }}
+                    />
                   ))}
                 </Board>
               </span>
@@ -216,7 +226,11 @@ const TaksModule = () => {
           <DragOverlay dropAnimation={null}>
             {activeTask ? (
               <div className="rotate-3 opacity-90">
-                <TaskCard task={activeTask} isDragging />
+                <TaskCard 
+                  task={activeTask} 
+                  isDragging 
+                  onEditClick={() => {}} 
+                />
               </div>
             ) : null}
           </DragOverlay>
@@ -225,6 +239,13 @@ const TaksModule = () => {
           <AddTaskModal isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
+      {selectedTask && (
+        <EditTaskModal 
+          isOpen={editModalOpen} 
+          setIsOpen={setEditModalOpen} 
+          task={selectedTask} 
+        />
+      )}
     </div>
   );
 };
